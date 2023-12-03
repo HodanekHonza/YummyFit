@@ -6,6 +6,8 @@ class FitMainController {
     return FitMainAbl.init(ucEnv.getUri(), ucEnv.getDtoIn(), ucEnv.getSession());
   }
 
+
+  // hello new comment
   load(ucEnv) {
     return FitMainAbl.load(ucEnv.getUri(), ucEnv.getSession());
   }
