@@ -25,6 +25,66 @@
       "sys/uuAppWorkspace/initUve": {
         "sysStateList": ["created"],
         "profileList": ["Public", "AwidLicenseOwner"]
+      },
+      "appConfig/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "appConfig/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "appConfig/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "userProfile/createUser": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "userProfile/deleteUser": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "userProfile/getUser": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "physicalActivity/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "physicalActivity/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "physicalActivity/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "calorieIntake/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "calorieIntake/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "calorieIntake/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "drinkingRegime/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "drinkingRegime/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "drinkingRegime/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
       }
     }
   }

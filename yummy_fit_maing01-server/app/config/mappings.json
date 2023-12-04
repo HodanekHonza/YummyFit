@@ -25,6 +25,81 @@
         "realization": "index.html",
         "httpMethod": "GET",
         "type": "UVE"
+      }"appConfig/list": {
+        "realization": "api/controllers/AppConfigController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "appConfig/create": {
+        "realization": "api/controllers/AppConfigController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "appConfig/get": {
+        "realization": "api/controllers/AppConfigController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "userProfile/createUser": {
+        "realization": "api/controllers/UserProfileController.createUser",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "userProfile/deleteUser": {
+        "realization": "api/controllers/UserProfileController.deleteUser",
+        "httpMethod": "DELETE",
+        "type": "CMD"
+      },
+      "userProfile/getUser": {
+        "realization": "api/controllers/UserProfileController.getUser",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "physicalActivity/create": {
+        "realization": "api/controllers/PhysicalActivityController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "physicalActivity/get": {
+        "realization": "api/controllers/PhysicalActivityController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "physicalActivity/update": {
+        "realization": "api/controllers/PhysicalActivityController.update",
+        "httpMethod": "PUT",
+        "type": "CMD"
+      },
+      "calorieIntake/create": {
+        "realization": "api/controllers/CalorieIntakeController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "calorieIntake/get": {
+        "realization": "api/controllers/CalorieIntakeController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "calorieIntake/update": {
+        "realization": "api/controllers/CalorieIntakeController.update",
+        "httpMethod": "PUT",
+        "type": "CMD"
+      },
+      "drinkingRegime/create": {
+        "realization": "api/controllers/DrinkingRegimeController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "drinkingRegime/get": {
+        "realization": "api/controllers/DrinkingRegimeController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "drinkingRegime/update": {
+        "realization": "api/controllers/DrinkingRegimeController.update",
+        "httpMethod": "PUT",
+        "type": "CMD"
+      }
       }
     }
   }
