@@ -26,10 +26,6 @@
         "sysStateList": ["created"],
         "profileList": ["Public", "AwidLicenseOwner"]
       },
-      "appConfig/list": {
-        "sysStateList": ["active"],
-        "profileList": ["Executives"]
-      },
       "appConfig/create": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]
@@ -38,15 +34,19 @@
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },
-      "userProfile/createUser": {
+      "appConfig/list": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },
-      "userProfile/deleteUser": {
+      "userProfile/create": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },
-      "userProfile/getUser": {
+      "userProfile/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
+      "userProfile/delete": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },

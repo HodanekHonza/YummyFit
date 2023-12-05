@@ -9,6 +9,12 @@ class AppConfigAbl {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("app-config");
   }
+
+  async create(awid, dToIn, session) {}
+
+  async get(awid, dtoIn, session) {}
+
+  async list(awid, dtoIn, session) {} 
 }
 
 module.exports = new AppConfigAbl();

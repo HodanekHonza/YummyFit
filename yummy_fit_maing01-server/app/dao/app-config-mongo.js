@@ -3,8 +3,14 @@ const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 
 class AppConfigMongo extends UuObjectDao {
   async createSchema() {}
-  async create(joke) {
-    return super.insertOne(joke);
+
+  async get(id) {
+    return await super.findOne({ id });
+  }
+
+  async list(awid) {
+    const filter = { awid };
+    return await super.find(filter);
   }
 }
 

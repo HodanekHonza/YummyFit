@@ -25,10 +25,6 @@
         "realization": "index.html",
         "httpMethod": "GET",
         "type": "UVE"
-      }"appConfig/list": {
-        "realization": "api/controllers/AppConfigController.list",
-        "httpMethod": "GET",
-        "type": "CMD"
       },
       "appConfig/create": {
         "realization": "api/controllers/AppConfigController.create",
@@ -40,19 +36,24 @@
         "httpMethod": "GET",
         "type": "CMD"
       },
-      "userProfile/createUser": {
-        "realization": "api/controllers/UserProfileController.createUser",
+      "appConfig/list": {
+        "realization": "api/controllers/AppConfigController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+        "userProfile/create": {
+        "realization": "api/controllers/UserProfileController.create",
         "httpMethod": "POST",
         "type": "CMD"
       },
-      "userProfile/deleteUser": {
-        "realization": "api/controllers/UserProfileController.deleteUser",
-        "httpMethod": "DELETE",
+      "userProfile/get": {
+        "realization": "api/controllers/UserProfileController.get",
+        "httpMethod": "GET",
         "type": "CMD"
       },
-      "userProfile/getUser": {
-        "realization": "api/controllers/UserProfileController.getUser",
-        "httpMethod": "GET",
+      "userProfile/delete": {
+        "realization": "api/controllers/UserProfileController.delete",
+        "httpMethod": "DELETE",
         "type": "CMD"
       },
       "physicalActivity/create": {
@@ -99,7 +100,6 @@
         "realization": "api/controllers/DrinkingRegimeController.update",
         "httpMethod": "PUT",
         "type": "CMD"
-      }
       }
     }
   }

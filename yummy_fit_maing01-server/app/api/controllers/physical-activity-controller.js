@@ -1,6 +1,28 @@
 "use strict";
-const DrinkingRegimeAbl = require("../../abl/drinking-regime-abl.js");
+const PhysicalActivityAbl = require("../../abl/physical-acitivity-abl.js");
 
-class DrinkingRegimeController {}
+class PhysicalActivityController {
+  
+  create(ucEnv) {
+    let dtoIn = ucEnv.getDtoIn();
+    let awid = ucEnv.getUri().getAwid();
+    let session = ucEnv.getSession();
+    return PhysicalActivityAbl.create(awid, dtoIn, session);
+  }
 
-module.exports = new DrinkingRegimeController();
+  get(ucEnv) {
+    let dtoIn = ucEnv.getDtoIn();
+    let awid = ucEnv.getUri().getAwid();
+    let session = ucEnv.getSession();
+    return PhysicalActivityAbl.get(awid, dtoIn, session);
+  }
+
+  update(ucEnv) {
+    let dtoIn = ucEnv.getDtoIn();
+    let awid = ucEnv.getUri().getAwid();
+    let session = ucEnv.getSession();
+    return PhysicalActivityAbl.update(awid, dtoIn, session);
+  }
+}
+
+module.exports = new PhysicalActivityController();

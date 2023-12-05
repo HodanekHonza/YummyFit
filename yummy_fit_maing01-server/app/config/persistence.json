@@ -6,6 +6,21 @@
       "schemaMap": {
         "fitMain": {
           "realization": "dao/FitMainMongo"
+        },
+        "app-config": {
+          "realization": "dao/AppConfigMongo"
+        },
+        "user-profile": {
+          "realization": "dao/UserProfileMongo"
+        },
+        "calorie-intake": {
+          "realization": "dao/CalorieIntakeMongo"
+        },
+        "physical-activity": {
+          "realization": "dao/PhysicalActivityMongo"
+        },
+        "drinking-regime": {
+          "realization": "dao/DrinkingRegimeMongo"
         }
       }
     }
