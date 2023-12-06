@@ -56,6 +56,8 @@ class AppConfigAbl {
 
     return { list }
   }
+
+  
 }
 
 module.exports = new AppConfigAbl();

@@ -11,30 +11,31 @@ class UserProfileAbl {
   }
 
   async create(awid, dtoIn, session) {
-    let uuAppErrorMap = {}
+    let uuAppErrorMap = {};
 
     const uuIdentity = session.getIdentity().getUuIdentity();
     const uuIdentityName = session.getIdentity().getName();
     let uuObject = {
-      
-        "uuIdentity": uuIdentity,
-        "uuItedentityName": uuIdentityName,
-        "weight": dtoIn.weight,
-        "height": dtoIn.height,
-        "personalAchievements": {
-          "dayUsingApp": 0
-        },
-        "dailySummary": [
-      ]
-    }
+      uuIdentity: uuIdentity,
+      uuItedentityName: uuIdentityName,
+      weight: dtoIn.weight,
+      height: dtoIn.height,
+      personalAchievements: {
+        dayUsingApp: 0,
+      },
+      dailySummary: [],
+    };
 
+    let list = await this.dao.create(uuObject);
 
-    let list = await this.dao.create(dtoIn);
-
-    return { list, uuAppErrorMap}
+    return { list, uuAppErrorMap };
   }
 
-  async get() {}
+  async get(awid, dtoIn, session) {
+    let uuAppErrorMap = {};
+    let list = await this.dao.get(dtoIn.uuIdentity);
+    return { list, uuAppErrorMap };
+  }
 
   async delete() {}
 }
