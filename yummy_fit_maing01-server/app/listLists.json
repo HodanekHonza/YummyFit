@@ -1,0 +1,63 @@
+{
+    "food": [
+      {
+        "id": "f001",
+        "name": "Grilled Chicken Salad",
+        "calorie": 300
+      },
+      {
+        "id": "f002",
+        "name": "Vegetable Stir Fry",
+        "calorie": 250
+      },
+      {
+        "id": "f003",
+        "name": "Fruit Smoothie",
+        "calorie": 200
+      }
+    ],
+    "activity": [
+      {
+        "id": "a001",
+        "name": "Morning Jog",
+        "length": 5, 
+        "duration": 30, 
+        "calorie": 300
+      },
+      {
+        "id": "a002",
+        "name": "Yoga Session",
+        "length": 1,
+        "duration": 60, 
+        "calorie": 200
+      },
+      {
+        "id": "a003",
+        "name": "Swimming",
+        "length": 2,
+        "duration": 45,
+        "calorie": 400
+      }
+    ],
+    "achievements": [
+      {
+        "id": "ach001",
+        "description": "Completed First 5K Run",
+        "iconUrl": "https://example.com/icons/5krun.png",
+        "daysUsing": 30
+      },
+      {
+        "id": "ach002",
+        "description": "Logged Meals for 30 Days",
+        "iconUrl": "https://example.com/icons/meallog.png",
+        "daysUsing": 30
+      },
+      {
+        "id": "ach003",
+        "description": "Achieved Weight Loss Goal",
+        "iconUrl": "https://example.com/icons/weightloss.png",
+        "daysUsing": 60
+      }
+    ]
+  }
+  

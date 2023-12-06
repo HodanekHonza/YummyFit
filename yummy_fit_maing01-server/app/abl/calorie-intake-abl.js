@@ -8,9 +8,14 @@ class CalorieIntakeAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("calorie-intake");
+    this.helperDao = DaoFactory.getDao("app-config");
   }
 
-  async create() {}
+  async create(awid, dtoIn, session) {
+    let list = await this.helperDao.get(dtoIn.id);
+
+    return list
+  }
 
   async get() {}
 
