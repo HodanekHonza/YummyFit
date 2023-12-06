@@ -10,7 +10,29 @@ class UserProfileAbl {
     this.dao = DaoFactory.getDao("user-profile");
   }
 
-  async create() {}
+  async create(awid, dtoIn, session) {
+    let uuAppErrorMap = {}
+
+    const uuIdentity = session.getIdentity().getUuIdentity();
+    const uuIdentityName = session.getIdentity().getName();
+    let uuObject = {
+      
+        "uuIdentity": uuIdentity,
+        "uuItedentityName": uuIdentityName,
+        "weight": dtoIn.weight,
+        "height": dtoIn.height,
+        "personalAchievements": {
+          "dayUsingApp": 0
+        },
+        "dailySummary": [
+      ]
+    }
+
+
+    let list = await this.dao.create(dtoIn);
+
+    return { list, uuAppErrorMap}
+  }
 
   async get() {}
 

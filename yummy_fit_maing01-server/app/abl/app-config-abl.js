@@ -8,7 +8,6 @@ class AppConfigAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("app-config");
-    this.helperDao = DaoFactory.getDao("app-config");
   }
 
   async create(awid, dToIn, session) {}
@@ -31,7 +30,7 @@ class AppConfigAbl {
     const uuIdentity = session.getIdentity().getUuIdentity();
     const uuIdentityName = session.getIdentity().getName();
 
-    let list = await this.helperDao.get(dtoIn.category,dtoIn.id);
+    let list = await this.dao.get(dtoIn.category,dtoIn.id);
 
 
    // let foodItem = list.food.find((item) => item.id === dtoIn.id);
@@ -44,7 +43,6 @@ class AppConfigAbl {
 
     const uuObject = {
       list,
-      
       awid,
       uuIdentity,
       uuIdentityName,
@@ -54,7 +52,7 @@ class AppConfigAbl {
 
   async list(awid, dtoIn, session) {
     
-    let list = await this.helperDao.list(dtoIn.category);
+    let list = await this.dao.list(dtoIn.category);
 
     return { list }
   }
