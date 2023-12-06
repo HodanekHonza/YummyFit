@@ -58,7 +58,7 @@
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },
-      "physicalActivity/update": {
+      "physicalActivity/delete": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },
@@ -70,7 +70,7 @@
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },
-      "calorieIntake/update": {
+      "calorieIntake/delete": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },

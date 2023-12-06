@@ -24,15 +24,16 @@ class CalorieIntakeAbl {
     }
 
     const item = await this.appConfigDao.get(category, itemId);
+    console.log("Fetched item:", item);
     if (!item || !item.calorie) {
-      throw new Error('Item not found or calorie information is missing');
+      throw new Error("Item not found or calorie information is missing");
     }
 
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
 
     const userProfile = await this.userProfileDao.get(uuIdentity);
-    const todayEntry = userProfile.dailySummary.find(entry => {
+    const todayEntry = userProfile.dailySummary.find((entry) => {
       const entryDate = new Date(entry.date);
       entryDate.setUTCHours(0, 0, 0, 0);
       return entryDate.getTime() === today.getTime();
@@ -41,11 +42,11 @@ class CalorieIntakeAbl {
     const totalCalories = item.calorie * quantity;
 
     let uuObject = {
-        uuIdentity: uuIdentity,
-        creationDate: today,
-        idOdFood: itemId,
-        amount: quantity,
-        calories: totalCalories
+      uuIdentity: uuIdentity,
+      creationDate: today,
+      idOdFood: itemId,
+      amount: quantity,
+      calories: totalCalories,
     };
 
     if (todayEntry) {
@@ -66,47 +67,49 @@ class CalorieIntakeAbl {
     return { uuObject, uuErrorMap };
   }
 
-
   async get(awid, dtoIn, session) {}
 
-  async update(awid, dtoIn, session) {
+  async delete(awid, dtoIn, session) {
     let uuErrorMap = {};
-  
+
     const { calorieIntakeId, uuIdentity } = dtoIn;
-  
+
     // Fetch the existing calorie intake record
     const calorieIntakeRecord = await this.dao.get(calorieIntakeId);
     if (!calorieIntakeRecord) {
-      throw new Error('Calorie intake record not found');
+      throw new Error("Calorie intake record not found");
     }
-  
+
     // Get the user's profile
     const userProfile = await this.userProfileDao.get(uuIdentity);
     if (!userProfile) {
-      throw new Error('User profile not found');
+      throw new Error("User profile not found");
     }
-  
+
     // Adjust the user's daily summary by subtracting the calories
     const recordDate = new Date(calorieIntakeRecord.creationDate);
     recordDate.setUTCHours(0, 0, 0, 0);
-  
-    let recordEntryIndex = userProfile.dailySummary.findIndex(entry => {
+
+    let recordEntryIndex = userProfile.dailySummary.findIndex((entry) => {
       const entryDate = new Date(entry.date);
       entryDate.setUTCHours(0, 0, 0, 0);
       return entryDate.getTime() === recordDate.getTime();
     });
-  
+
     if (recordEntryIndex !== -1) {
-      const updatedCalories = Math.max(0, userProfile.dailySummary[recordEntryIndex].calories - calorieIntakeRecord.calories);
+      const updatedCalories = Math.max(
+        0,
+        userProfile.dailySummary[recordEntryIndex].calories - calorieIntakeRecord.calories
+      );
       const update = { $set: { [`dailySummary.${recordEntryIndex}.calories`]: updatedCalories } };
-  
+
       // Update the user profile with the adjusted daily summary
       await this.userProfileDao.update(uuIdentity, {}, update);
     }
-  
+
     // Delete the calorie intake record
     await this.dao.delete(calorieIntakeId);
-  
+
     return { uuObject: null, uuErrorMap };
   }
 }

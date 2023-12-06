@@ -17,11 +17,11 @@ class CalorieIntakeController {
     return CalorieIntakeAbl.get(awid, dtoIn, session);
   }
 
-  update(ucEnv) {
+  delete(ucEnv) {
     let dtoIn = ucEnv.getDtoIn();
     let awid = ucEnv.getUri().getAwid();
     let session = ucEnv.getSession();
-    return CalorieIntakeAbl.update(awid, dtoIn, session);
+    return CalorieIntakeAbl.delete(awid, dtoIn, session);
   }
 }
 

@@ -66,9 +66,9 @@
         "httpMethod": "GET",
         "type": "CMD"
       },
-      "physicalActivity/update": {
-        "realization": "api/controllers/PhysicalActivityController.update",
-        "httpMethod": "PUT",
+      "physicalActivity/delete": {
+        "realization": "api/controllers/PhysicalActivityController.delete",
+        "httpMethod": "DELETE",
         "type": "CMD"
       },
       "calorieIntake/create": {
@@ -81,9 +81,9 @@
         "httpMethod": "GET",
         "type": "CMD"
       },
-      "calorieIntake/update": {
-        "realization": "api/controllers/CalorieIntakeController.update",
-        "httpMethod": "PUT",
+      "calorieIntake/delete": {
+        "realization": "api/controllers/CalorieIntakeController.delete",
+        "httpMethod": "DELETE",
         "type": "CMD"
       },
       "drinkingRegime/create": {

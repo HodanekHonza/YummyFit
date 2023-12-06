@@ -17,11 +17,11 @@ class PhysicalActivityController {
     return PhysicalActivityAbl.get(awid, dtoIn, session);
   }
 
-  update(ucEnv) {
+  delete(ucEnv) {
     let dtoIn = ucEnv.getDtoIn();
     let awid = ucEnv.getUri().getAwid();
     let session = ucEnv.getSession();
-    return PhysicalActivityAbl.update(awid, dtoIn, session);
+    return PhysicalActivityAbl.delete(awid, dtoIn, session);
   }
 }
 
