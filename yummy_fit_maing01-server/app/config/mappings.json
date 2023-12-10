@@ -26,11 +26,6 @@
         "httpMethod": "GET",
         "type": "UVE"
       },
-      "appConfig/create": {
-        "realization": "api/controllers/AppConfigController.create",
-        "httpMethod": "POST",
-        "type": "CMD"
-      },
       "appConfig/get": {
         "realization": "api/controllers/AppConfigController.get",
         "httpMethod": "GET",

@@ -2,14 +2,6 @@
 const AppConfigAbl = require("../../abl/app-config-abl.js");
 
 class AppConfigController {
-  
-  create(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let awid = ucEnv.getUri().getAwid();
-    let session = ucEnv.getSession();
-    return AppConfigAbl.create(awid, dtoIn, session);
-  }
-
   get(ucEnv) {
     let dtoIn = ucEnv.getDtoIn();
     let awid = ucEnv.getUri().getAwid();

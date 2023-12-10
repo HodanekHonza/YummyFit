@@ -5,9 +5,8 @@ class DrinkingRegimeController {
   
   create(ucEnv) {
     let dtoIn = ucEnv.getDtoIn();
-    let awid = ucEnv.getUri().getAwid();
     let session = ucEnv.getSession();
-    return DrinkingRegimeAbl.create(awid, dtoIn, session);
+    return DrinkingRegimeAbl.create(dtoIn, session);
   }
 
   get(ucEnv) {

@@ -2,7 +2,8 @@
 const { Validator } = require("uu_appg01_server").Validation;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const { DaoFactory } = require("uu_appg01_server").ObjectStore;
-//const Errors = require("../api/errors/drinking-regime-error.js");
+const Errors = require("../api/errors/drinking-regime-error.js");
+const Warnings = require("../api/warnings/drinking-regime-warning.js");
 
 class DrinkingRegimeAbl {
   constructor() {
@@ -11,10 +12,21 @@ class DrinkingRegimeAbl {
     this.userProfileDao = DaoFactory.getDao("user-profile");
   }
 
-  async create(awid, dtoIn, session) {
-    let uuErrorMap = {};
-    const { waterAmount, uuIdentity } = dtoIn;
-    
+  async create(dtoIn, session) {
+    let uuAppErrorMap = {};
+    // validation of dtoIn
+    const validationResult = this.validator.validate("drinkingRegimeCreateDtoInType", dtoIn);
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      uuAppErrorMap,
+      Warnings.DrinkingRegime.UnsupportedKeys.code,
+      Errors.DrinkingRegime.InvalidDtoIn
+    );
+
+    // get uuIdentity information
+    const uuIdentity = session.getIdentity().getUuIdentity();
+
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
 
@@ -28,25 +40,25 @@ class DrinkingRegimeAbl {
     let uuObject = {
       uuIdentity: uuIdentity,
       creationDate: today,
-      waterAmount: waterAmount
+      waterAmount: dtoIn.waterAmount,
     };
 
     if (todayEntry) {
-      const updatedWaterIntake = (todayEntry.waterIntake || 0) + waterAmount;
+      const updatedWaterIntake = (todayEntry.waterIntake || 0) + dtoIn.waterAmount;
       const update = { $set: { "dailySummary.$.waterIntake": updatedWaterIntake } };
       const filter = { "dailySummary.date": today };
 
       await this.userProfileDao.update(uuIdentity, filter, update);
       await this.dao.create(uuObject);
     } else {
-      const newEntry = { date: today, waterIntake: waterAmount };
+      const newEntry = { date: today, waterIntake: dtoIn.waterAmount };
       const update = { $push: { dailySummary: newEntry } };
 
       await this.userProfileDao.update(uuIdentity, null, update);
       await this.dao.create(uuObject);
     }
 
-    return { uuObject, uuErrorMap };
+    return { uuObject, uuAppErrorMap };
   }
 
   async get() {}

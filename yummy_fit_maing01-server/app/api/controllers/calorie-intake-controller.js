@@ -5,9 +5,8 @@ class CalorieIntakeController {
   
   create(ucEnv) {
     let dtoIn = ucEnv.getDtoIn();
-    let awid = ucEnv.getUri().getAwid();
     let session = ucEnv.getSession();
-    return CalorieIntakeAbl.create(awid, dtoIn, session);
+    return CalorieIntakeAbl.create(dtoIn, session);
   }
 
   get(ucEnv) {

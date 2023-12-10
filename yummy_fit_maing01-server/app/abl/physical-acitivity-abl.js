@@ -2,7 +2,8 @@
 const { Validator } = require("uu_appg01_server").Validation;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const { DaoFactory } = require("uu_appg01_server").ObjectStore;
-//const Errors = require("../api/errors/physical-activity-error.js");
+const Errors = require("../api/errors/physical-activity-error.js");
+const Warnings = require("../api/warnings/physical-activity-warning.js");
 
 class PhysicalActivityAbl {
   constructor() {
@@ -12,11 +13,22 @@ class PhysicalActivityAbl {
     this.userProfileDao = DaoFactory.getDao("user-profile");
   }
 
-  async create(awid, dtoIn, session) {
-    let uuErrorMap = {};
-    const { activityId, uuIdentity, duration } = dtoIn;
+  async create(dtoIn, session) {
+    let uuAppErrorMap = {};
+    // validation of dtoIn
+    const validationResult = this.validator.validate("physicalActivityCreateDtoInType", dtoIn);
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      uuAppErrorMap,
+      Warnings.PhysicalActivity.UnsupportedKeys.code,
+      Errors.PhysicalActivity.InvalidDtoIn
+    );
 
-    const activity = await this.appConfigDao.get("activity", activityId);
+    // get uuIdentity information
+    const uuIdentity = session.getIdentity().getUuIdentity();
+
+    const activity = await this.appConfigDao.get("activity", dtoIn.id);
     if (!activity || !activity.calorie) {
       throw new Error("Activity not found or calorie information is missing");
     }
@@ -31,13 +43,13 @@ class PhysicalActivityAbl {
       return entryDate.getTime() === today.getTime();
     });
 
-    const totalCalories = activity.calorie * duration;
+    const totalCalories = activity.calorie * dtoIn.duration;
 
     let uuObject = {
       uuIdentity: uuIdentity,
       creationDate: today,
-      idOfActivity: activityId,
-      duration: duration,
+      idOfActivity: dtoIn.id,
+      duration: dtoIn.duration,
       calories: totalCalories,
     };
 
@@ -56,15 +68,25 @@ class PhysicalActivityAbl {
       await this.dao.create(uuObject);
     }
 
-    return { uuObject, uuErrorMap };
+    return { uuObject, uuAppErrorMap };
   }
 
-  async delete(awid, dtoIn, session) {
-    let uuErrorMap = {};
+  async delete(dtoIn, session) {
+    let uuAppErrorMap = {};
+    // validation of dtoIn
+    const validationResult = this.validator.validate("physicalActivityDeleteDtoInType", dtoIn);
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      uuAppErrorMap,
+      Warnings.PhysicalActivity.UnsupportedKeys.code,
+      Errors.PhysicalActivity.InvalidDtoIn
+    );
 
-    const { physicalActivityId, uuIdentity } = dtoIn;
+    // get uuIdentity information
+    const uuIdentity = session.getIdentity().getUuIdentity();
 
-    const physicalActivityRecord = await this.dao.get(physicalActivityId);
+    const physicalActivityRecord = await this.dao.get(dtoIn.id);
     if (!physicalActivityRecord) {
       throw new Error("Physical activity record not found");
     }
@@ -86,9 +108,9 @@ class PhysicalActivityAbl {
       await this.userProfileDao.update(uuIdentity, {}, update);
     }
 
-    await this.dao.delete(physicalActivityId);
+    await this.dao.delete(dtoIn.id);
 
-    return { uuObject: null, uuErrorMap };
+    return { uuObject: null, uuAppErrorMap };
   }
   async get() {}
 }

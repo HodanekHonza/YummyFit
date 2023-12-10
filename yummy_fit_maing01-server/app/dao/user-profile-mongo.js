@@ -10,7 +10,6 @@ class UserProfileMongo extends UuObjectDao {
 
   async get(uuIdentity) {
     const query = { uuIdentity: uuIdentity };
-
     return await super.findOne(query);
   }
 
