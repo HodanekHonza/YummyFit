@@ -5,8 +5,7 @@ const appConfigGetItemDtoInType = shape({
   category: string(1, 15).isRequired(),
 });
 
-// Display Shopping Lists (LIST)
+// Display category List (LIST)
 const appConfigListsCategoryDtoInType = shape({
   category: string(1, 15).isRequired(),
 });
-

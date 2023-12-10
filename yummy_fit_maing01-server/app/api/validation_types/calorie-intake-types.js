@@ -5,7 +5,7 @@ const calorieIntakeCreateDtoInType = shape({
   quantity: integer().isRequired(),
 });
 
-// Display Item from selected category (DELETE)
+// Delete Calorie Intake (DELETE)
 const calorieIntakeDeleteDtoInType = shape({
   id: id().isRequired(),
 });
