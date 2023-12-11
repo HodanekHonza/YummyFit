@@ -85,16 +85,6 @@
         "realization": "api/controllers/DrinkingRegimeController.create",
         "httpMethod": "POST",
         "type": "CMD"
-      },
-      "drinkingRegime/get": {
-        "realization": "api/controllers/DrinkingRegimeController.get",
-        "httpMethod": "GET",
-        "type": "CMD"
-      },
-      "drinkingRegime/update": {
-        "realization": "api/controllers/DrinkingRegimeController.update",
-        "httpMethod": "PUT",
-        "type": "CMD"
       }
     }
   }

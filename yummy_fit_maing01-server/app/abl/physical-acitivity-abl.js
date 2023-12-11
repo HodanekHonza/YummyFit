@@ -91,7 +91,16 @@ class PhysicalActivityAbl {
       throw new Error("Physical activity record not found");
     }
 
+    //      throw new Errors.List.ListDoesNotExist({ uuAppErrorMap });
+
+
+
     const userProfile = await this.userProfileDao.get(uuIdentity);
+
+    if (!userProfile) {
+      throw new Error("User profile not found");
+    }
+
     const recordDate = new Date(physicalActivityRecord.creationDate);
     recordDate.setUTCHours(0, 0, 0, 0);
 

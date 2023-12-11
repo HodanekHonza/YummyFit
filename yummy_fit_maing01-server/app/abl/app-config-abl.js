@@ -30,6 +30,9 @@ class AppConfigAbl {
 
     let list = await this.dao.get(dtoIn.category, dtoIn.id);
 
+    if (!list) {
+      throw new Error("desired food/activity/achivement not found");
+    }
     const uuObject = {
       list,
       awid,

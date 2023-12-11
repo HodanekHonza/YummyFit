@@ -73,14 +73,6 @@
       "drinkingRegime/create": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]
-      },
-      "drinkingRegime/get": {
-        "sysStateList": ["active"],
-        "profileList": ["Executives"]
-      },
-      "drinkingRegime/update": {
-        "sysStateList": ["active"],
-        "profileList": ["Executives"]
       }
     }
   }

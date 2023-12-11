@@ -60,10 +60,6 @@ class DrinkingRegimeAbl {
 
     return { uuObject, uuAppErrorMap };
   }
-
-  async get() {}
-
-  async update() {}
 }
 
 module.exports = new DrinkingRegimeAbl();
