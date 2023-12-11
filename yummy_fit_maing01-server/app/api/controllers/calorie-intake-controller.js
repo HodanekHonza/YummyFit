@@ -2,25 +2,16 @@
 const CalorieIntakeAbl = require("../../abl/calorie-intake-abl.js");
 
 class CalorieIntakeController {
-  
   create(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let session = ucEnv.getSession();
-    return CalorieIntakeAbl.create(dtoIn, session);
+    return CalorieIntakeAbl.create(ucEnv.getDtoIn(), ucEnv.getSession());
   }
 
-  get(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let awid = ucEnv.getUri().getAwid();
-    let session = ucEnv.getSession();
-    return CalorieIntakeAbl.get(awid, dtoIn, session);
+  list(ucEnv) {
+    return CalorieIntakeAbl.list(ucEnv.getDtoIn());
   }
 
   delete(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let awid = ucEnv.getUri().getAwid();
-    let session = ucEnv.getSession();
-    return CalorieIntakeAbl.delete(awid, dtoIn, session);
+    return CalorieIntakeAbl.delete(ucEnv.getDtoIn(), ucEnv.getSession());
   }
 }
 

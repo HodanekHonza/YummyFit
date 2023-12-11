@@ -5,6 +5,9 @@ const calorieIntakeCreateDtoInType = shape({
   quantity: integer().isRequired(),
 });
 
+// List Calorie Intake (GET)
+const calorieIntakeListDtoInType = shape({});
+
 // Delete Calorie Intake (DELETE)
 const calorieIntakeDeleteDtoInType = shape({
   id: id().isRequired(),

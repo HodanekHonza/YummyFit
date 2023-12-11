@@ -8,3 +8,5 @@ const physicalActivityCreateDtoInType = shape({
 const physicalActivityDeleteDtoInType = shape({
   id: id().isRequired(),
 });
+
+const physicalActivityListDtoInType = shape({});

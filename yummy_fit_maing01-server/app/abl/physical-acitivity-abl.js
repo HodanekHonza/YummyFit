@@ -112,7 +112,22 @@ class PhysicalActivityAbl {
 
     return { uuObject: null, uuAppErrorMap };
   }
-  async get() {}
+  async list(dtoIn) {
+    let uuAppErrorMap = {};
+    // validation of dtoIn
+    const validationResult = this.validator.validate("physicalActivityListDtoInType", dtoIn);
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      uuAppErrorMap,
+      Warnings.PhysicalActivity.UnsupportedKeys.code,
+      Errors.PhysicalActivity.InvalidDtoIn
+    );
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+    let list = await this.dao.list(today);
+    return { list, uuAppErrorMap };
+  }
 }
 
 module.exports = new PhysicalActivityAbl();

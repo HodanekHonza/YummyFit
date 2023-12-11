@@ -50,7 +50,7 @@
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },
-      "physicalActivity/get": {
+      "physicalActivity/list": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },
@@ -62,7 +62,7 @@
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },
-      "calorieIntake/get": {
+      "calorieIntake/list": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },

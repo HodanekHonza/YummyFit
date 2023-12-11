@@ -56,8 +56,8 @@
         "httpMethod": "POST",
         "type": "CMD"
       },
-      "physicalActivity/get": {
-        "realization": "api/controllers/PhysicalActivityController.get",
+      "physicalActivity/list": {
+        "realization": "api/controllers/PhysicalActivityController.list",
         "httpMethod": "GET",
         "type": "CMD"
       },
@@ -71,8 +71,8 @@
         "httpMethod": "POST",
         "type": "CMD"
       },
-      "calorieIntake/get": {
-        "realization": "api/controllers/CalorieIntakeController.get",
+      "calorieIntake/list": {
+        "realization": "api/controllers/CalorieIntakeController.list",
         "httpMethod": "GET",
         "type": "CMD"
       },

@@ -75,9 +75,24 @@ class CalorieIntakeAbl {
     return { uuObject, uuAppErrorMap };
   }
 
-  async get(awid, dtoIn, session) {}
+  async list(dtoIn) {
+    let uuAppErrorMap = {};
+    // validation of dtoIn
+    const validationResult = this.validator.validate("calorieIntakeListDtoInType", dtoIn);
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      uuAppErrorMap,
+      Warnings.CalorieIntake.UnsupportedKeys.code,
+      Errors.CalorieIntake.InvalidDtoIn
+    );
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+    let list = await this.dao.list(today);
+    return { list, uuAppErrorMap };
+  }
 
-  async delete(awid, dtoIn, session) {
+  async delete(dtoIn, session) {
     let uuAppErrorMap = {};
     // validation of dtoIn
     const validationResult = this.validator.validate("calorieIntakeDeleteDtoInType", dtoIn);
