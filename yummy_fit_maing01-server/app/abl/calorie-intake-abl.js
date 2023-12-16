@@ -28,13 +28,9 @@ class CalorieIntakeAbl {
     // get uuIdentity information
     const uuIdentity = session.getIdentity().getUuIdentity();
 
-    if (dtoIn.quantity <= 0) {
-      throw new Error("Invalid quantity. Quantity must be greater than 0.");
-    }
-
     const item = await this.appConfigDao.get("food", dtoIn.id);
     if (!item || !item.calorie) {
-      throw new Error("Item not found or calorie information is missing");
+      throw new Errors.CalorieIntake.ItemNotFound({ uuAppErrorMap });
     }
 
     const today = new Date();
@@ -109,12 +105,12 @@ class CalorieIntakeAbl {
 
     const calorieIntakeRecord = await this.dao.get(dtoIn.id);
     if (!calorieIntakeRecord) {
-      throw new Error("Calorie intake record not found");
+      throw new Errors.CalorieIntake.IntakeRecordNotFound({ uuAppErrorMap });
     }
 
     const userProfile = await this.userProfileDao.get(uuIdentity);
     if (!userProfile) {
-      throw new Error("User profile not found");
+      throw new Errors.CalorieIntake.UserProfileNotFound({ uuAppErrorMap });
     }
 
     const recordDate = new Date(calorieIntakeRecord.creationDate);

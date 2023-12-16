@@ -2,7 +2,7 @@
 // Create Calorie Intake (POST)
 const calorieIntakeCreateDtoInType = shape({
   id: id().isRequired(),
-  quantity: integer().isRequired(),
+  quantity: integer(1,1000).isRequired(),
 });
 
 // List Calorie Intake (GET)
