@@ -1,5 +1,7 @@
 # Development and Usage
 
+Fitness and food tracking app, using my university fullstack framework thats entierly build on react and node.js. project is using three layer architecture. 
+
 See following guidelines:
 
 - [uuAppg01Devkit Documentation](https://uuapp.plus4u.net/uu-bookkit-maing01/e884539c8511447a977c7ff070e7f2cf/book)
