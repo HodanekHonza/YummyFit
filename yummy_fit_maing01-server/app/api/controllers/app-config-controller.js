@@ -2,24 +2,15 @@
 const AppConfigAbl = require("../../abl/app-config-abl.js");
 
 class AppConfigController {
+  create(ucEnv) {
+    return AppConfigAbl.create(ucEnv.getDtoIn(), ucEnv.getSession());
+  }
   get(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let awid = ucEnv.getUri().getAwid();
-    let session = ucEnv.getSession();
-    return AppConfigAbl.get(awid, dtoIn, session);
+    return AppConfigAbl.get(ucEnv.getUri().getAwid(), ucEnv.getDtoIn(), ucEnv.getSession());
   }
 
   list(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let awid = ucEnv.getUri().getAwid();
-    let session = ucEnv.getSession();
-    return AppConfigAbl.list(awid, dtoIn, session);
-  }
-  create(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let awid = ucEnv.getUri().getAwid();
-    let session = ucEnv.getSession();
-    return AppConfigAbl.create(awid, dtoIn, session);
+    return AppConfigAbl.list(ucEnv.getUri().getAwid(), ucEnv.getDtoIn(), ucEnv.getSession());
   }
 }
 

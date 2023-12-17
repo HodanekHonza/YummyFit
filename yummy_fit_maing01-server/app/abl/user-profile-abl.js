@@ -11,7 +11,7 @@ class UserProfileAbl {
     this.dao = DaoFactory.getDao("user-profile");
   }
 
-  async create(awid, dtoIn, session) {
+  async create(dtoIn, session) {
     let uuAppErrorMap = {};
     // validation of dtoIn
     const validationResult = this.validator.validate("userProfileCreateDtoInType", dtoIn);
@@ -26,7 +26,7 @@ class UserProfileAbl {
     // get uuIdentity information
     const uuIdentity = session.getIdentity().getUuIdentity();
     const uuIdentityName = session.getIdentity().getName();
-    let uuObject = {
+    const uuObject = {
       uuIdentity: uuIdentity,
       uuItedentityName: uuIdentityName,
       weight: dtoIn.weight,
@@ -37,12 +37,12 @@ class UserProfileAbl {
       dailySummary: [],
     };
 
-    let list = await this.dao.create(uuObject);
+    const list = await this.dao.create(uuObject);
 
     return { list, uuAppErrorMap };
   }
 
-  async get(awid, dtoIn, session) {
+  async get(dtoIn) {
     let uuAppErrorMap = {};
     // validation of dtoIn
     const validationResult = this.validator.validate("userProfileGetDtoInType", dtoIn);
@@ -53,7 +53,7 @@ class UserProfileAbl {
       Warnings.UserProfile.UnsupportedKeys.code,
       Errors.UserProfile.InvalidDtoIn
     );
-    let list = await this.dao.get(dtoIn.uuIdentity);
+    const list = await this.dao.get(dtoIn.uuIdentity);
 
     if (!list) {
       throw new Errors.UserProfile.UserProfileNotFound({ uuAppErrorMap });
@@ -61,8 +61,6 @@ class UserProfileAbl {
 
     return { list, uuAppErrorMap };
   }
-
-  async delete() {}
 }
 
 module.exports = new UserProfileAbl();

@@ -51,11 +51,6 @@
         "httpMethod": "GET",
         "type": "CMD"
       },
-      "userProfile/delete": {
-        "realization": "api/controllers/UserProfileController.delete",
-        "httpMethod": "DELETE",
-        "type": "CMD"
-      },
       "physicalActivity/create": {
         "realization": "api/controllers/PhysicalActivityController.create",
         "httpMethod": "POST",

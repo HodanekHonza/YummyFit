@@ -46,10 +46,6 @@
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },
-      "userProfile/delete": {
-        "sysStateList": ["active"],
-        "profileList": ["Executives"]
-      },
       "physicalActivity/create": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]

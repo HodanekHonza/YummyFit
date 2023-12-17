@@ -46,7 +46,7 @@ class PhysicalActivityAbl {
 
     const totalCalories = activity.calorie * dtoIn.duration;
 
-    let uuObject = {
+    const uuObject = {
       uuIdentity: uuIdentity,
       creationDate: today,
       idOfActivity: dtoIn.id,
@@ -101,7 +101,7 @@ class PhysicalActivityAbl {
     const recordDate = new Date(physicalActivityRecord.creationDate);
     recordDate.setUTCHours(0, 0, 0, 0);
 
-    let recordEntryIndex = userProfile.dailySummary.findIndex((entry) => {
+    const recordEntryIndex = userProfile.dailySummary.findIndex((entry) => {
       const entryDate = new Date(entry.date);
       entryDate.setUTCHours(0, 0, 0, 0);
       return entryDate.getTime() === recordDate.getTime();
@@ -131,7 +131,7 @@ class PhysicalActivityAbl {
     );
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
-    let list = await this.dao.list(today);
+    const list = await this.dao.list(today);
     return { list, uuAppErrorMap };
   }
 }

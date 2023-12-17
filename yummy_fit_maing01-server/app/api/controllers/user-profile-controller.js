@@ -3,24 +3,11 @@ const UserProfileAbl = require("../../abl/user-profile-abl.js");
 
 class UserProfileController {
   create(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let awid = ucEnv.getUri().getAwid();
-    let session = ucEnv.getSession();
-    return UserProfileAbl.create(awid, dtoIn, session);
-  } 
-
-  get(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let awid = ucEnv.getUri().getAwid();
-    let session = ucEnv.getSession();
-    return UserProfileAbl.get(awid, dtoIn, session);
+    return UserProfileAbl.create(ucEnv.getDtoIn(), ucEnv.getSession());
   }
 
-  delete(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let awid = ucEnv.getUri().getAwid();
-    let session = ucEnv.getSession();
-    return UserProfileAbl.delete(awid, dtoIn, session);
+  get(ucEnv) {
+    return UserProfileAbl.get(ucEnv.getDtoIn());
   }
 }
 

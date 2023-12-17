@@ -45,7 +45,7 @@ class CalorieIntakeAbl {
 
     const totalCalories = item.calorie * dtoIn.quantity;
 
-    let uuObject = {
+    const uuObject = {
       uuIdentity: uuIdentity,
       creationDate: today,
       idOdFood: dtoIn.id,
@@ -84,7 +84,7 @@ class CalorieIntakeAbl {
     );
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
-    let list = await this.dao.list(today);
+    const list = await this.dao.list(today);
     return { list, uuAppErrorMap };
   }
 
@@ -116,7 +116,7 @@ class CalorieIntakeAbl {
     const recordDate = new Date(calorieIntakeRecord.creationDate);
     recordDate.setUTCHours(0, 0, 0, 0);
 
-    let recordEntryIndex = userProfile.dailySummary.findIndex((entry) => {
+    const recordEntryIndex = userProfile.dailySummary.findIndex((entry) => {
       const entryDate = new Date(entry.date);
       entryDate.setUTCHours(0, 0, 0, 0);
       return entryDate.getTime() === recordDate.getTime();

@@ -3,19 +3,13 @@ const PhysicalActivityAbl = require("../../abl/physical-acitivity-abl.js");
 
 class PhysicalActivityController {
   create(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let session = ucEnv.getSession();
-    return PhysicalActivityAbl.create(dtoIn, session);
+    return PhysicalActivityAbl.create(ucEnv.getDtoIn(), ucEnv.getSession());
   }
-
+  delete(ucEnv) {
+    return PhysicalActivityAbl.delete(ucEnv.getDtoIn(), ucEnv.getSession());
+  }
   list(ucEnv) {
     return PhysicalActivityAbl.list(ucEnv.getDtoIn());
-  }
-
-  delete(ucEnv) {
-    let dtoIn = ucEnv.getDtoIn();
-    let session = ucEnv.getSession();
-    return PhysicalActivityAbl.delete(dtoIn, session);
   }
 }
 

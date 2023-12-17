@@ -11,7 +11,7 @@ class AppConfigAbl {
     this.dao = DaoFactory.getDao("app-config");
   }
 
-  async create(awid, dtoIn, session) {
+  async create(dtoIn, session) {
     let uuAppErrorMap = {};
     //validation of dtoIn
     const validationResult = this.validator.validate("appConfigCreateItemDtoInType", dtoIn);
@@ -26,7 +26,7 @@ class AppConfigAbl {
     const uuIdentity = session.getIdentity().getUuIdentity();
     const uuIdentityName = session.getIdentity().getName();
 
-    let list = await this.dao.create(dtoIn);
+    const list = await this.dao.create(dtoIn);
 
     const uuObject = {
       list,
@@ -54,7 +54,7 @@ class AppConfigAbl {
     const uuIdentity = session.getIdentity().getUuIdentity();
     const uuIdentityName = session.getIdentity().getName();
 
-    let list = await this.dao.get(dtoIn.category, dtoIn.id);
+    const list = await this.dao.get(dtoIn.category, dtoIn.id);
 
     if (!list) {
       throw new Errors.AppConfig.ActivityFoodAchivementDoesNotExist({ uuAppErrorMap });
@@ -84,9 +84,9 @@ class AppConfigAbl {
     // set visibility
     const uuIdentity = session.getIdentity().getUuIdentity();
     const uuIdentityName = session.getIdentity().getName();
-    let list = await this.dao.list(dtoIn.category);
+    const list = await this.dao.list(dtoIn.category);
 
-    let uuObject = {
+    const uuObject = {
       list,
       uuIdentity,
       uuIdentityName,
