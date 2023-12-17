@@ -2,12 +2,12 @@
 // Display Item from selected category (GET)
 const appConfigGetItemDtoInType = shape({
   id: id().isRequired(),
-  category: string(1, 15).isRequired(),
+  category: oneOf(["food", "activity", "achievements"]),
 });
 
 // Display category List (LIST)
 const appConfigListsCategoryDtoInType = shape({
-  category: string(1, 15).isRequired(),
+  category: oneOf(["food", "activity", "achievements"]),
 });
 
 // Create Item (POST)
