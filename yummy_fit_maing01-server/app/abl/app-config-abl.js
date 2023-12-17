@@ -11,11 +11,29 @@ class AppConfigAbl {
     this.dao = DaoFactory.getDao("app-config");
   }
 
-
   async create(awid, dtoIn, session) {
+    let uuAppErrorMap = {};
+    //validation of dtoIn
+    //  const validationResult = this.validator.validate("appConfigCreateItemDtoInType", dtoIn);
+    //  uuAppErrorMap = ValidationHelper.processValidationResult(
+    //    dtoIn,
+    //    validationResult,
+    //    uuAppErrorMap,
+    //    Warnings.AppConfig.UnsupportedKeys.code,
+    //    Errors.AppConfig.InvalidDtoIn
+    //  );
 
+    const uuIdentity = session.getIdentity().getUuIdentity();
+    const uuIdentityName = session.getIdentity().getName();
     let list = await this.dao.create(dtoIn);
-    return { list };
+
+    const uuObject = {
+      list,
+      uuIdentity,
+      uuIdentityName,
+      uuAppErrorMap,
+    };
+    return uuObject;
   }
 
   async get(awid, dtoIn, session) {

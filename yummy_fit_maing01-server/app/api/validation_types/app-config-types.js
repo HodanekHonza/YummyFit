@@ -9,3 +9,8 @@ const appConfigGetItemDtoInType = shape({
 const appConfigListsCategoryDtoInType = shape({
   category: string(1, 15).isRequired(),
 });
+
+// Create Item (POST)
+const appConfigCreateItemDtoInType = shape({
+	category: string(1, 15).isRequired(),
+});
