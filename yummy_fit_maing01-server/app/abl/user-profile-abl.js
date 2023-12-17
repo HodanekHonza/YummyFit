@@ -56,7 +56,7 @@ class UserProfileAbl {
     let list = await this.dao.get(dtoIn.uuIdentity);
 
     if (!list) {
-      throw new Error("User Profile record not found");
+      throw new Errors.UserProfile.UserProfileNotFound({ uuAppErrorMap });
     }
 
     return { list, uuAppErrorMap };

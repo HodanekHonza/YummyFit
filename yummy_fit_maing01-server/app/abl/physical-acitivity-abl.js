@@ -29,8 +29,9 @@ class PhysicalActivityAbl {
     const uuIdentity = session.getIdentity().getUuIdentity();
 
     const activity = await this.appConfigDao.get("activity", dtoIn.id);
-    if (!activity || !activity.calorie) {
-      throw new Error("Activity not found or calorie information is missing");
+
+    if (!activity) {
+      throw new Errors.PhysicalActivity.ActivityDoesNotExist({ uuAppErrorMap });
     }
 
     const today = new Date();
@@ -88,17 +89,13 @@ class PhysicalActivityAbl {
 
     const physicalActivityRecord = await this.dao.get(dtoIn.id);
     if (!physicalActivityRecord) {
-      throw new Error("Physical activity record not found");
+      throw new Errors.PhysicalActivity.ActivityRecordDoesNotExist({ uuAppErrorMap });
     }
-
-    //      throw new Errors.List.ListDoesNotExist({ uuAppErrorMap });
-
-
 
     const userProfile = await this.userProfileDao.get(uuIdentity);
 
     if (!userProfile) {
-      throw new Error("User profile not found");
+      throw new Errors.PhysicalActivity.UserProfileNotFound({ uuAppErrorMap });
     }
 
     const recordDate = new Date(physicalActivityRecord.creationDate);

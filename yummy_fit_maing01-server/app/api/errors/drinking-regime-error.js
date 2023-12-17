@@ -1,10 +1,10 @@
 "use strict";
-const ShoppingListMainUseCaseError = require("./fit-main-use-case-error.js");
+const FitMainUseCaseError = require("./fit-main-use-case-error.js");
 
 const DrinkingRegime = {
-  UC_CODE: `${ShoppingListMainUseCaseError.ERROR_PREFIX}shoppingList/list/`,
+  UC_CODE: `${FitMainUseCaseError.ERROR_PREFIX}drinkingRegime/`,
 
-  InvalidDtoIn: class extends ShoppingListMainUseCaseError {
+  InvalidDtoIn: class extends FitMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${DrinkingRegime.UC_CODE}invalidDtoIn`;
@@ -12,21 +12,21 @@ const DrinkingRegime = {
     }
   },
 
-  ShoppingListDaoListFailed: class extends ShoppingListMainUseCaseError {
+  ShoppingListDaoListFailed: class extends FitMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${DrinkingRegime.UC_CODE}shoppingListDaoListFailed`;
       this.message = "Failed to list shopping lists.";
     }
   },
-  UserNotAuthorized: class extends ShoppingListMainUseCaseError {
+  UserNotAuthorized: class extends FitMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${DrinkingRegime.UC_CODE}userNotAuthorized`;
       this.message = "User not authorized.";
     }
   },
-  ListDoesNotExist: class extends ShoppingListMainUseCaseError {
+  ListDoesNotExist: class extends FitMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${DrinkingRegime.UC_CODE}ListDoesNotExist`;
