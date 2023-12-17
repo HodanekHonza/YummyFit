@@ -15,6 +15,12 @@ class AppConfigController {
     let session = ucEnv.getSession();
     return AppConfigAbl.list(awid, dtoIn, session);
   }
+  create(ucEnv) {
+    let dtoIn = ucEnv.getDtoIn();
+    let awid = ucEnv.getUri().getAwid();
+    let session = ucEnv.getSession();
+    return AppConfigAbl.create(awid, dtoIn, session);
+  }
 }
 
 module.exports = new AppConfigController();

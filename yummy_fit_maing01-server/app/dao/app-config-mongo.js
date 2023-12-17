@@ -4,6 +4,25 @@ const { ObjectId } = require("mongodb");
 class AppConfigMongo extends UuObjectDao {
   async createSchema() {}
 
+  async create(dtoIn) {
+    if (!dtoIn.item._id) {
+      dtoIn.item._id = new ObjectId();
+    }
+
+    const documentId = new ObjectId("656f4286362f3c762817d02b");
+    const updateResult = await super.findOneAndUpdate(
+      { _id: documentId },
+      {
+        $push: { [dtoIn.category]: dtoIn.item },
+      },
+      {
+        $set: { "sys.rev": +1 },
+      }
+    );
+
+    return updateResult;
+  }
+
   async get(category, itemId) {
     const objectId = new ObjectId(itemId);
 

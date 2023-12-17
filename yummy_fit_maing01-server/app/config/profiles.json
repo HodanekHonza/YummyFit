@@ -26,6 +26,10 @@
         "sysStateList": ["created"],
         "profileList": ["Public", "AwidLicenseOwner"]
       },
+      "appConfig/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
       "appConfig/get": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]

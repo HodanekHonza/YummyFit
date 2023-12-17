@@ -11,6 +11,13 @@ class AppConfigAbl {
     this.dao = DaoFactory.getDao("app-config");
   }
 
+
+  async create(awid, dtoIn, session) {
+
+    let list = await this.dao.create(dtoIn);
+    return { list };
+  }
+
   async get(awid, dtoIn, session) {
     let uuAppErrorMap = {};
 
