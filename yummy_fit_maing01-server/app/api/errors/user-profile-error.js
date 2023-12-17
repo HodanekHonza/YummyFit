@@ -19,28 +19,6 @@ const UserProfile = {
       this.message = "User profile not found";
     }
   },
-
-  ShoppingListDaoListFailed: class extends FitMainUseCaseError {
-    constructor() {
-      super(...arguments);
-      this.code = `${UserProfile.UC_CODE}shoppingListDaoListFailed`;
-      this.message = "Failed to list shopping lists.";
-    }
-  },
-  UserNotAuthorized: class extends FitMainUseCaseError {
-    constructor() {
-      super(...arguments);
-      this.code = `${UserProfile.UC_CODE}userNotAuthorized`;
-      this.message = "User not authorized.";
-    }
-  },
-  ListDoesNotExist: class extends FitMainUseCaseError {
-    constructor() {
-      super(...arguments);
-      this.code = `${UserProfile.UC_CODE}ListDoesNotExist`;
-      this.message = "List does not exist";
-    }
-  },
 };
 
 module.exports = {

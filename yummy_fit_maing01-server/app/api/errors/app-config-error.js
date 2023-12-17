@@ -11,6 +11,13 @@ const AppConfig = {
       this.message = "DtoIn is not valid.";
     }
   },
+  ActivityFoodAchivementDoesNotExist: class extends FitMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${AppConfig.UC_CODE}ActivityDoesNotExist`;
+      this.message = "Activity, food or achivement does not exist";
+    }
+  },
 };
 
 module.exports = {
