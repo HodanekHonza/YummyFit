@@ -25,12 +25,6 @@ class AppConfigMongo extends UuObjectDao {
 
   async get(category, itemId) {
     const objectId = new ObjectId(itemId);
-
-    // Validate the category to ensure it's a valid field
-    if (!["food", "activity", "achievements"].includes(category)) {
-      throw new Error("Invalid category name");
-    }
-
     // Aggregation pipeline to find and extract the specific item from the given category
     const pipeline = [
       {
