@@ -43,6 +43,22 @@ class CalorieIntakeAbl {
       return entryDate.getTime() === today.getTime();
     });
 
+    //checking if user already has achievement record for the day
+    const todayEntryachievements = userProfile.personalAchievements.find((entry) => {
+      const entryDate = new Date(entry.date);
+      entryDate.setUTCHours(0, 0, 0, 0);
+      return entryDate.getTime() === today.getTime();
+    });
+
+    if (!todayEntryachievements) {
+      //pushing entry for achi
+      const newEntryAchi = { date: today };
+
+      const updateAchi = { $push: { personalAchievements: newEntryAchi }, $set: { personalAchievementsDaysCount: +1 } };
+
+      await this.userProfileDao.update(uuIdentity, null, updateAchi);
+    }
+
     const totalCalories = item.calorie * dtoIn.quantity;
 
     const uuObject = {
@@ -61,6 +77,7 @@ class CalorieIntakeAbl {
       await this.userProfileDao.update(uuIdentity, filter, update);
       await this.dao.create(uuObject);
     } else {
+      //pushing entry for calories
       const newEntry = { date: today, calories: totalCalories };
       const update = { $push: { dailySummary: newEntry } };
 
@@ -104,11 +121,13 @@ class CalorieIntakeAbl {
     const uuIdentity = session.getIdentity().getUuIdentity();
 
     const calorieIntakeRecord = await this.dao.get(dtoIn.id);
+
     if (!calorieIntakeRecord) {
       throw new Errors.CalorieIntake.IntakeRecordNotFound({ uuAppErrorMap });
     }
 
     const userProfile = await this.userProfileDao.get(uuIdentity);
+
     if (!userProfile) {
       throw new Errors.CalorieIntake.UserProfileNotFound({ uuAppErrorMap });
     }
@@ -116,6 +135,7 @@ class CalorieIntakeAbl {
     const recordDate = new Date(calorieIntakeRecord.creationDate);
     recordDate.setUTCHours(0, 0, 0, 0);
 
+    // checking if record entry is in daily summary
     const recordEntryIndex = userProfile.dailySummary.findIndex((entry) => {
       const entryDate = new Date(entry.date);
       entryDate.setUTCHours(0, 0, 0, 0);

@@ -44,6 +44,22 @@ class PhysicalActivityAbl {
       return entryDate.getTime() === today.getTime();
     });
 
+    //checking if user already has achievement record for the day
+    const todayEntryachievements = userProfile.personalAchievements.find((entry) => {
+      const entryDate = new Date(entry.date);
+      entryDate.setUTCHours(0, 0, 0, 0);
+      return entryDate.getTime() === today.getTime();
+    });
+
+    if (!todayEntryachievements) {
+      //pushing entry for achi
+      const newEntryAchi = { date: today };
+
+      const updateAchi = { $push: { personalAchievements: newEntryAchi }, $set: { personalAchievementsDaysCount: +1 } };
+
+      await this.userProfileDao.update(uuIdentity, null, updateAchi);
+    }
+
     const totalCalories = activity.calorie * dtoIn.duration;
 
     const uuObject = {

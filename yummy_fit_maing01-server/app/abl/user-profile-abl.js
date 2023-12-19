@@ -31,9 +31,8 @@ class UserProfileAbl {
       uuItedentityName: uuIdentityName,
       weight: dtoIn.weight,
       height: dtoIn.height,
-      personalAchievements: {
-        dayUsingApp: 0,
-      },
+      personalAchievementsDaysCount: 0,
+      personalAchievements: [],
       dailySummary: [],
     };
 
