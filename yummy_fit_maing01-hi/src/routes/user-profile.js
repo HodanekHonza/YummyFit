@@ -8,7 +8,7 @@ import Config from "./config/config.js";
 import WelcomeRow from "../bricks/welcome-row.js";
 import RouteBar from "../core/route-bar.js";
 import importLsi from "../lsi/import-lsi.js";
-import View from "../core/main-page/view.js";
+import View from "../core/user-profile/view.js"
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -27,9 +27,9 @@ const Css = {
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-let Home = createVisualComponent({
+let UserProfile = createVisualComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "Home",
+  uu5Tag: Config.TAG + "UserProfile",
   //@@viewOff:statics
 
   //@@viewOn:propTypes
@@ -40,18 +40,16 @@ let Home = createVisualComponent({
   defaultProps: {},
   //@@viewOff:defaultProps
 
-  render(props) {
+  render() {
     //@@viewOn:private
-    const { identity } = useSession();
     //@@viewOff:private
 
     //@@viewOn:interface
     //@@viewOff:interface
 
     //@@viewOn:render
-    const attrs = Utils.VisualComponent.getAttrs(props);
     return (
-      <div {...attrs}>
+      <div>
         <RouteBar />
         <View />
       </div>
@@ -60,9 +58,9 @@ let Home = createVisualComponent({
   },
 });
 
-Home = withRoute(Home, { authenticated: true });
+UserProfile = withRoute(UserProfile, { authenticated: true });
 
 //@@viewOn:exports
-export { Home };
-export default Home;
+export { UserProfile };
+export default UserProfile;
 //@@viewOff:exports

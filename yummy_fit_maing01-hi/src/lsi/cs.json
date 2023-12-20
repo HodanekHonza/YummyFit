@@ -30,7 +30,8 @@
     "initialize": "Inicializovat"
   },
   "Menu": {
-    "home": "Vítejte",
-    "about": "O aplikaci"
+    "home": "Home menu",
+    "about": "O aplikaci",
+    "userProfile": "User profile"
   }
 }
