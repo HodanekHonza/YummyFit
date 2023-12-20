@@ -8,28 +8,28 @@ const INITIAL_VALUE = [
   {
     day: "1",
     calorieGoal: 2100,
-    achievedCals: 700
+    achievedCals: 700,
   },
   {
     day: "2",
     calorieGoal: 2100,
-    achievedCals: 1500
+    achievedCals: 1500,
   },
   {
     day: "3",
     calorieGoal: 2100,
-    achievedCals: 300
+    achievedCals: 300,
   },
   {
     day: "4",
     calorieGoal: 2100,
-    achievedCals: 950
+    achievedCals: 950,
   },
   {
     day: "5",
     calorieGoal: 2100,
-    achievedCals: 100
-  }
+    achievedCals: 100,
+  },
 ];
 
 export const CalorieProvider = createComponent({

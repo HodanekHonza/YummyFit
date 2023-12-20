@@ -6,14 +6,16 @@ import { Text } from "uu5g05-elements";
 //@@viewOff:imports
 
 //@@viewOn:constants
-const data = [{
-    "type": "Calories remaining",
-    "amount": 700
+const data = [
+  {
+    type: "Calories remaining",
+    amount: 700,
   },
   {
-    "type": "Achieved",
-    "amount": 1400
-  }]
+    type: "Achieved",
+    amount: 1400,
+  },
+];
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -24,9 +26,9 @@ const Css = {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      height: "60vh"
+      height: "60vh",
     }),
-  };
+};
 //@@viewOff:css
 
 //@@viewOn:helpers
@@ -52,16 +54,10 @@ const CalorieChart = createVisualComponent({
 
     //@@viewOn:render
     return (
-        <div className={Css.main()}>
-          <Uu5ChartsBricks.PieChart
-                data = {[data]}
-                serieList={[
-                    { valueKey: "amount", labelKey: "type" }
-                ]}
-                legend
-            />
-          <Text>Calorie goal for today: {sum}</Text>
-        </div>
+      <div className={Css.main()}>
+        <Uu5ChartsBricks.PieChart data={[data]} serieList={[{ valueKey: "amount", labelKey: "type" }]} legend />
+        <Text>Calorie goal for today: {sum}</Text>
+      </div>
     );
     //@@viewOff:render
   },
