@@ -51,13 +51,14 @@ class PhysicalActivityAbl {
       return entryDate.getTime() === today.getTime();
     });
 
-    //branch test 
-
     if (!todayEntryachievements) {
       //pushing entry for achi
       const newEntryAchi = { date: today };
 
-      const updateAchi = { $push: { personalAchievements: newEntryAchi }, $set: { personalAchievementsDaysCount: +1 } };
+      const updateAchi = {
+        $push: { personalAchievements: newEntryAchi },
+        $set: { personalAchievementsDaysCount: userProfile.personalAchievementsDaysCount + 1 },
+      };
 
       await this.userProfileDao.update(uuIdentity, null, updateAchi);
     }
