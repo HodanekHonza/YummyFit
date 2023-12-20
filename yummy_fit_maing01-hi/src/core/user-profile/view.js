@@ -59,12 +59,12 @@ let UserProfile = createVisualComponent({
               {identity.name}
             </Uu5Elements.Text>
           )}
-          <br/>
-        <Uu5Elements.Text category="story" segment="heading" type="h4">
-              Věk: 22 <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" /> <br/> Váha: 82kg <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" />
-        </Uu5Elements.Text>
+          <br />
+          <Uu5Elements.Text category="story" segment="heading" type="h4">
+            Věk: 22 <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" /> <br /> Váha: 82kg{" "}
+            <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" />
+          </Uu5Elements.Text>
         </WelcomeRow>
-
       </div>
     );
     //@@viewOff:render
