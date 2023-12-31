@@ -1,8 +1,8 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils } from "uu5g05";
+import { Text } from "uu5g05-elements";
 import Uu5ChartsBricks from "uu5chartsg01-bricks";
 import Config from "./config/config.js";
-import { Text } from "uu5g05-elements";
 //@@viewOff:imports
 
 //@@viewOn:constants

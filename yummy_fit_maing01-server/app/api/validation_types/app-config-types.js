@@ -15,6 +15,8 @@ const appConfigCreateItemDtoInType = shape({
 	category: oneOf(["food", "activity", "achievements"]),
   item: shape({
     name: string(1, 15).isRequired(),
-    calorie: integer(1, 1000).isRequired(),
+    calorie: integer(1, 1000),
+    length: integer(1, 1000),
+    duration: integer(1, 1000),
   })
 });
