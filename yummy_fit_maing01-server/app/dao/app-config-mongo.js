@@ -5,22 +5,37 @@ class AppConfigMongo extends UuObjectDao {
   async createSchema() {}
 
   async create(dtoIn) {
-    if (!dtoIn.item._id) {
-      dtoIn.item._id = new ObjectId();
+    // Predefined _id for the document to be updated
+    const documentId = new ObjectId("659132f38ac21a628d6c5d39");
+
+    // Current timestamp
+    const currentTimestamp = new Date();
+
+    // Find the document with the given _id
+    const documentExists = await super.findOne({ _id: documentId });
+
+    if (documentExists) {
+      // Document exists, add the item to the specified category and update sys.mts and sys.rev
+      await super.findOneAndUpdate(
+        { _id: documentId },
+        {
+          $push: { [dtoIn.category]: { ...dtoIn.item, _id: new ObjectId() } },
+        },
+        { $set: { "sys.mts": currentTimestamp, "sys.rev": documentExists.sys.rev + 1 } }
+      );
+    } else {
+      // Document doesn't exist, create it with the new item and initialize sys
+      const newDocument = {
+        _id: documentId,
+        [dtoIn.category]: [{ ...dtoIn.item, _id: new ObjectId() }],
+        sys: {
+          cts: currentTimestamp,
+          mts: currentTimestamp,
+          rev: 1,
+        },
+      };
+      await super.insertOne(newDocument);
     }
-
-    const documentId = new ObjectId("656f4286362f3c762817d02b");
-    const updateResult = await super.findOneAndUpdate(
-      { _id: documentId },
-      {
-        $push: { [dtoIn.category]: dtoIn.item },
-      },
-      {
-        $set: { "sys.rev": +1 },
-      }
-    );
-
-    return updateResult;
   }
 
   async get(category, itemId) {
