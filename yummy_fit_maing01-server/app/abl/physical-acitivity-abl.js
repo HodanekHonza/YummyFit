@@ -68,6 +68,7 @@ class PhysicalActivityAbl {
     const uuObject = {
       uuIdentity: uuIdentity,
       creationDate: today,
+      nameOfActivity: activity.name,
       idOfActivity: dtoIn.id,
       duration: dtoIn.duration,
       calories: totalCalories,
@@ -151,7 +152,7 @@ class PhysicalActivityAbl {
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
     const list = await this.dao.list(today);
-    return { list, uuAppErrorMap };
+    return list.itemList;
   }
 }
 

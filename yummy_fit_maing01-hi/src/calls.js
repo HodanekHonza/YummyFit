@@ -39,6 +39,33 @@ const Calls = {
     return await Calls.getWorkspace();
   },
 
+  YummyFit: {
+    load(dtoIn) {
+      const commandUri = Calls.getCommandUri("userProfile/get");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+    loadFood(dtoIn) {
+      const commandUri = Calls.getCommandUri("appConfig/list");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+    createFood(dtoIn) {
+      const commandUri = Calls.getCommandUri("calorieIntake/create");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    createActivity(dtoIn) {
+      const commandUri = Calls.getCommandUri("physicalActivity/create");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    loadTodaysActivity(dtoIn) {
+      const commandUri = Calls.getCommandUri("physicalActivity/list");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+    deleteTodaysActivity(dtoIn) {
+      const commandUri = Calls.getCommandUri("physicalActivity/delete");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+  },
+
   getCommandUri(useCase, baseUri = Environment.appBaseUri) {
     return (!baseUri.endsWith("/") ? baseUri + "/" : baseUri) + (useCase.startsWith("/") ? useCase.slice(1) : useCase);
   },

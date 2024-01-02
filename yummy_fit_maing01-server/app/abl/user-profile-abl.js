@@ -41,7 +41,7 @@ class UserProfileAbl {
     return { list, uuAppErrorMap };
   }
 
-  async get(dtoIn) {
+  async get(dtoIn, session) {
     let uuAppErrorMap = {};
     // validation of dtoIn
     const validationResult = this.validator.validate("userProfileGetDtoInType", dtoIn);
@@ -52,7 +52,8 @@ class UserProfileAbl {
       Warnings.UserProfile.UnsupportedKeys.code,
       Errors.UserProfile.InvalidDtoIn
     );
-    const list = await this.dao.get(dtoIn.uuIdentity);
+    const uuIdentity = session.getIdentity().getUuIdentity();
+    const list = await this.dao.get(uuIdentity);
 
     if (!list) {
       throw new Errors.UserProfile.UserProfileNotFound({ uuAppErrorMap });

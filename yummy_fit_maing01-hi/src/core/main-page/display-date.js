@@ -1,4 +1,4 @@
-import { createVisualComponent, useState } from "uu5g05";
+import { createVisualComponent, useState, useEffect, useMemo } from "uu5g05";
 import { UuDate } from "uu_i18ng01";
 import Uu5Elements from "uu5g05-elements";
 
@@ -6,12 +6,15 @@ function withControlledInput(Calendar) {
   return (props) => {
     const { value: propsValue, onSelect } = props;
     const [value, setValue] = useState(propsValue);
+    useEffect(() => {
+      console.log(value);
+    }, [value]);
 
     return (
       <div>
         <Calendar
           {...props}
-          value={value}
+          value={new Date(value)}
           onSelect={(e) => {
             typeof onSelect === "function" && onSelect(e);
             setValue(e.data.value);
@@ -33,7 +36,7 @@ const DisplayDate = createVisualComponent({
         <Calendar
           value={selectedRangeDate[0]}
           selectionMode="single"
-          onSelect={({ data }) => console.log(data.value)}
+          // onSelect={({ data }) => console.log(new Date(data.value))}
         />
       </div>
     );

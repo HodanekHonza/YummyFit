@@ -5,6 +5,4 @@ const userProfileCreateDtoInType = shape({
   height: integer().isRequired(),
 });
 
-const userProfileGetDtoInType = shape({
-  uuIdentity: string(1, 25).isRequired(),
-});
+const userProfileGetDtoInType = shape({});

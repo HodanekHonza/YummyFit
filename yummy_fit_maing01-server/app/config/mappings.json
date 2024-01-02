@@ -63,7 +63,7 @@
       },
       "physicalActivity/delete": {
         "realization": "api/controllers/PhysicalActivityController.delete",
-        "httpMethod": "DELETE",
+        "httpMethod": "POST",
         "type": "CMD"
       },
       "calorieIntake/create": {
