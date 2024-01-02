@@ -37,9 +37,10 @@ const YummyFitProvider = createComponent({
       pageSize: 1,
     });
 
-    const yummyFitActivityList = useDataObject({
+    const yummyFitActivityList = useDataList({
       handlerMap: {
         load: handleLoadActivity,
+        update: handleCreateActivity,
       },
       itemHandlerMap: {},
       pageSize: 1,
@@ -50,6 +51,18 @@ const YummyFitProvider = createComponent({
         load: handleLoadAchievements,
       },
       itemHandlerMap: {},
+      pageSize: 1,
+    });
+
+    const TodaysActivityList = useDataList({
+      handlerMap: {
+        load: handleListTodayActivity,
+        delete: handleDeleteTodaysActivity,
+      },
+      itemHandlerMap: {
+        load: handleListTodayActivity,
+        delete: handleDeleteTodaysActivity,
+      },
       pageSize: 1,
     });
 
@@ -74,17 +87,16 @@ const YummyFitProvider = createComponent({
       return Calls.YummyFit.createFood(dtoIn);
     }
 
-    // // Function to change the currently selected list
-    // function selectList(listId) {
-    //   setCurrentListId(listId);
-    // }
+    function handleListTodayActivity(dtoIn) {
+      return Calls.YummyFit.loadTodaysActivity(dtoIn);
+    }
 
-    // const { identity } = useSession();
-    // function isUserOwner(listId) {
-    //   // Assuming jokeDataList.data is an array of list objects as per the provided JSON structure
-    //   const list = jokeDataList.data.find((list) => list.data.id === listId);
-    //   return identity?.uuIdentity === list?.data?.ownerId;
-    // }
+    function handleCreateActivity(dtoIn) {
+      return Calls.YummyFit.createActivity(dtoIn);
+    }
+    function handleDeleteTodaysActivity(dtoIn) {
+      return Calls.YummyFit.deleteTodaysActivity(dtoIn);
+    }
 
     //@@viewOn:render
     const value = {
@@ -92,6 +104,7 @@ const YummyFitProvider = createComponent({
       yummyFitFoodList,
       yummyFitActivityList,
       yummyFitAchievementsList,
+      TodaysActivityList,
     };
 
     return (

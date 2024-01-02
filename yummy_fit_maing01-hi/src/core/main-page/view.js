@@ -45,7 +45,8 @@ const View = createVisualComponent({
   render() {
     //@@viewOn:private
     //@@viewOff:private
-    const { yummyFitDataList, yummyFitFoodList, yummyFitActivityList, yummyFitAchievementsList } = useYummyFit();
+    const { yummyFitDataList, yummyFitFoodList, yummyFitActivityList, yummyFitAchievementsList, TodaysActivityList } =
+      useYummyFit();
     // function loadContect() {
     //   try {
     //     yummyFitDataList.handlerMap.loadFood();
@@ -56,32 +57,34 @@ const View = createVisualComponent({
     //   }
     // }
 
-    console.log(yummyFitFoodList.data);
+    console.log(TodaysActivityList);
 
     //@@viewOn:render
     return (
       <>
         <div className={Css.main()}>
           {" "}
-          <ModalOnButton header="Choose date" colorScheme="primary" size="l" content={<DisplayDate />} />
+          {/* <ModalOnButton header="Choose date" colorScheme="primary" size="l" content={<DisplayDate />} /> */}
         </div>
         <div className={Css.main()}>
           <ModalOnButton
             header="Add meal"
-            content={yummyFitFoodList.data.uuObject.list}
-            create={yummyFitFoodList.handlerMap.create}
+            // content={yummyFitFoodList.data}
+            // create={yummyFitFoodList.handlerMap.create}
             size="xl"
           />
           <ModalOnButton
             header="Add activity"
-            content={yummyFitActivityList.data.uuObject.list}
-            create={yummyFitFoodList.handlerMap.create}
+            content={yummyFitActivityList.data}
+            todayData={TodaysActivityList.data}
+            create={yummyFitActivityList.handlerMap.update}
+            delete={TodaysActivityList.handlerMap.delete}
             size="xl"
           />
           <ModalOnButton
             header="Add water"
-            content={yummyFitFoodList.data.uuObject.list}
-            create={yummyFitFoodList.handlerMap.create}
+            // content={yummyFitFoodList.data}
+            // create={yummyFitFoodList.handlerMap.create}
             size="xl"
           />
         </div>
@@ -96,3 +99,28 @@ const View = createVisualComponent({
 export { View };
 export default View;
 //@@viewOff:exports
+
+// [
+//   {
+//     "data": {
+//       "name": "run",
+//       "calorie": 300,
+//       "_id": "6591340b9d68fa242b923cc1"
+//     },
+//     "state": "ready",
+//     "errorData": null,
+//     "pendingData": null,
+//     "handlerMap": {}
+//   },
+//   {
+//     "data": {
+//       "name": "Banana",
+//       "calorie": 150,
+//       "_id": "65946709cc99456ae7ea1c1d"
+//     },
+//     "state": "ready",
+//     "errorData": null,
+//     "pendingData": null,
+//     "handlerMap": {}
+//   }
+// ]

@@ -5,11 +5,20 @@ import Uu5Forms from "uu5g05-forms";
 const ModalOnButton = createVisualComponent({
   render({ header, ...props }) {
     /*@@viewOn:example*/
-
-    function createfood(id) {
+    console.log(props.todayData);
+    function createfood(id, quantifaier) {
       try {
         //console.log(id);
-        props.create({ id: id, quantity: 1 });
+        props.create({ id: id, duration: 1 });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    function deleteFood(id) {
+      try {
+        //console.log(id);
+        props.delete({ id: id });
       } catch (e) {
         console.log(e);
       }
@@ -22,15 +31,31 @@ const ModalOnButton = createVisualComponent({
           {header}
         </Button>
         <Modal {...props} header={header} open={open} onClose={() => setOpen(false)}>
+          <h2>Choose Activity</h2>
           {Array.isArray(props.content) &&
-            props.content.map((thing) => (
-              <div key={thing._id}>
-                <Button onClick={() => createfood(thing._id)}>
+            props.content?.map((thing) => (
+              <div key={thing.data._id}>
+                <button onClick={() => createfood(thing.data._id)}>
                   <div>
-                    <p> {thing.name} </p>
-                    <p> {thing.calorie} </p>
+                    <p> {thing.data.name} </p>
+                    <p> {thing.data.calorie} </p>
                   </div>
-                </Button>
+                </button>
+              </div>
+            ))}
+          <h2>Todays things</h2>
+          {Array.isArray(props.todayData) &&
+            props.todayData?.map((activity) => (
+              <div key={activity.data.id}>
+                <button onClick={() => deleteFood(activity.data.id)}>
+                  <div>
+                    <p> {activity.data.uuIdentity} </p>
+                    <p> {activity.data.creationDate} </p>
+                    <p> {activity.data.idOfActivity} </p>
+                    <p> {activity.data.duration} </p>
+                    <p> {activity.data.calories} </p>
+                  </div>
+                </button>
               </div>
             ))}
           <Uu5Elements.Grid
@@ -38,8 +63,7 @@ const ModalOnButton = createVisualComponent({
             columnGap={Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"])}
             justifyContent={{ s: "end" }}
           >
-            <Uu5Forms.CancelButton onClick={() => setOpen(false)} />
-            <Uu5Forms.SubmitButton icon="uugds-check">Confirm</Uu5Forms.SubmitButton>
+            {/* <Uu5Forms.SubmitButton icon="uugds-check">Confirm</Uu5Forms.SubmitButton> */}
           </Uu5Elements.Grid>
         </Modal>
       </Fragment>

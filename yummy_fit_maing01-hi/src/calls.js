@@ -52,6 +52,18 @@ const Calls = {
       const commandUri = Calls.getCommandUri("calorieIntake/create");
       return Calls.call("post", commandUri, dtoIn);
     },
+    createActivity(dtoIn) {
+      const commandUri = Calls.getCommandUri("physicalActivity/create");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    loadTodaysActivity(dtoIn) {
+      const commandUri = Calls.getCommandUri("physicalActivity/list");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+    deleteTodaysActivity(dtoIn) {
+      const commandUri = Calls.getCommandUri("physicalActivity/delete");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
 
   getCommandUri(useCase, baseUri = Environment.appBaseUri) {

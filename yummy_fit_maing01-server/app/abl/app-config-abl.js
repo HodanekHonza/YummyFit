@@ -91,9 +91,10 @@ class AppConfigAbl {
       uuIdentity,
       uuIdentityName,
       awid,
+      uuAppErrorMap,
     };
 
-    return { uuObject, uuAppErrorMap };
+    return list;
   }
 }
 
