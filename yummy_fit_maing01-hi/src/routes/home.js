@@ -4,11 +4,11 @@ import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import { withRoute } from "uu_plus4u5g02-app";
 
+import View from "../core/main-page/view.js";
 import Config from "./config/config.js";
 import WelcomeRow from "../bricks/welcome-row.js";
 import RouteBar from "../core/route-bar.js";
 import importLsi from "../lsi/import-lsi.js";
-import View from "../core/main-page/view.js";
 //@@viewOff:imports
 
 //@@viewOn:constants

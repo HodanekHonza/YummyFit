@@ -7,7 +7,7 @@ class UserProfileController {
   }
 
   get(ucEnv) {
-    return UserProfileAbl.get(ucEnv.getDtoIn());
+    return UserProfileAbl.get(ucEnv.getDtoIn(), ucEnv.getSession());
   }
 }
 

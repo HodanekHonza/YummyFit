@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent } from "uu5g05";
+import { createVisualComponent, Environment, useSession } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Forms from "uu5g05-forms";
 import { Button } from "uu5g05-elements";
@@ -7,7 +7,7 @@ import CalorieChart from "./calorie-chart.js";
 import Config from "./config/config.js";
 import ModalOnButton from "./modal-button.js";
 import DisplayDate from "./display-date.js";
-
+import { useYummyFit } from "../yummyfit-context.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -45,59 +45,44 @@ const View = createVisualComponent({
   render() {
     //@@viewOn:private
     //@@viewOff:private
+    const { yummyFitDataList, yummyFitFoodList, yummyFitActivityList, yummyFitAchievementsList } = useYummyFit();
+    // function loadContect() {
+    //   try {
+    //     yummyFitDataList.handlerMap.loadFood();
+    //   } catch (error) {
+    //     // We pass Error.Message instance to the Uu5Forms.Form that shows alert
+    //     //throw new Utils.Error.Message("list create failed!", error);
+    //     console.log(error);
+    //   }
+    // }
+
+    console.log(yummyFitFoodList.data);
 
     //@@viewOn:render
     return (
       <>
         <div className={Css.main()}>
           {" "}
-          <ModalOnButton header="Choose date" colorScheme="primary" size="l" children={<DisplayDate />} />
+          <ModalOnButton header="Choose date" colorScheme="primary" size="l" content={<DisplayDate />} />
         </div>
         <div className={Css.main()}>
           <ModalOnButton
             header="Add meal"
-            children={"Add meal form"}
+            content={yummyFitFoodList.data.uuObject.list}
+            create={yummyFitFoodList.handlerMap.create}
             size="xl"
-            footer={
-              <Uu5Elements.Grid
-                templateColumns={{ xs: "repeat(2, 1fr)", s: "repeat(2, auto)" }}
-                columnGap={Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"])}
-                justifyContent={{ s: "end" }}
-              >
-                <Uu5Forms.CancelButton />
-                <Uu5Forms.SubmitButton icon="uugds-check">Confirm</Uu5Forms.SubmitButton>
-              </Uu5Elements.Grid>
-            }
           />
           <ModalOnButton
             header="Add activity"
-            children={"Add activity form"}
+            content={yummyFitActivityList.data.uuObject.list}
+            create={yummyFitFoodList.handlerMap.create}
             size="xl"
-            footer={
-              <Uu5Elements.Grid
-                templateColumns={{ xs: "repeat(2, 1fr)", s: "repeat(2, auto)" }}
-                columnGap={Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"])}
-                justifyContent={{ s: "end" }}
-              >
-                <Uu5Forms.CancelButton />
-                <Uu5Forms.SubmitButton icon="uugds-check">Confirm</Uu5Forms.SubmitButton>
-              </Uu5Elements.Grid>
-            }
           />
           <ModalOnButton
             header="Add water"
-            children={"Add water form"}
+            content={yummyFitFoodList.data.uuObject.list}
+            create={yummyFitFoodList.handlerMap.create}
             size="xl"
-            footer={
-              <Uu5Elements.Grid
-                templateColumns={{ xs: "repeat(2, 1fr)", s: "repeat(2, auto)" }}
-                columnGap={Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"])}
-                justifyContent={{ s: "end" }}
-              >
-                <Uu5Forms.CancelButton />
-                <Uu5Forms.SubmitButton icon="uugds-check">Confirm</Uu5Forms.SubmitButton>
-              </Uu5Elements.Grid>
-            }
           />
         </div>
         <CalorieChart />
