@@ -57,10 +57,7 @@ const YummyFitProvider = createComponent({
     const TodaysActivityList = useDataList({
       handlerMap: {
         load: handleListTodayActivity,
-        delete: handleDeleteTodaysActivity,
-      },
-      itemHandlerMap: {
-        load: handleListTodayActivity,
+        update: handleCreateTodaysActivity,
         delete: handleDeleteTodaysActivity,
       },
       pageSize: 1,
@@ -94,6 +91,11 @@ const YummyFitProvider = createComponent({
     function handleCreateActivity(dtoIn) {
       return Calls.YummyFit.createActivity(dtoIn);
     }
+
+    function handleCreateTodaysActivity(dtoIn) {
+      return Calls.YummyFit.createTodaysActivity(dtoIn);
+    }
+
     function handleDeleteTodaysActivity(dtoIn) {
       return Calls.YummyFit.deleteTodaysActivity(dtoIn);
     }

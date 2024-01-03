@@ -56,6 +56,10 @@ const Calls = {
       const commandUri = Calls.getCommandUri("physicalActivity/create");
       return Calls.call("post", commandUri, dtoIn);
     },
+    createTodaysActivity(dtoIn) {
+      const commandUri = Calls.getCommandUri("physicalActivity/create");
+      return Calls.call("post", commandUri, dtoIn);
+    },
     loadTodaysActivity(dtoIn) {
       const commandUri = Calls.getCommandUri("physicalActivity/list");
       return Calls.call("get", commandUri, dtoIn);
