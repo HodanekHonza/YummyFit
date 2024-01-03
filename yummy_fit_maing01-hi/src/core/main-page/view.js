@@ -77,7 +77,7 @@ const View = createVisualComponent({
             header="Add activity"
             content={yummyFitActivityList.data}
             todayData={TodaysActivityList.data}
-            create={yummyFitActivityList.handlerMap.update}
+            create={TodaysActivityList.handlerMap.update}
             delete={TodaysActivityList.handlerMap.delete}
             size="xl"
           />
