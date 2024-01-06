@@ -45,7 +45,9 @@ const CalorieChart = createVisualComponent({
   //@@viewOn:defaultProps
   //@@viewOff:defaultProps
 
-  render() {
+  render(props) {
+    const { selectedDate } = props;
+    console.log(selectedDate?.calories);
     //@@viewOn:private
     const sum = data.reduce((accumulator, currentValue) => {
       return accumulator + currentValue.amount;
@@ -56,7 +58,7 @@ const CalorieChart = createVisualComponent({
     return (
       <div className={Css.main()}>
         <Uu5ChartsBricks.PieChart data={[data]} serieList={[{ valueKey: "amount", labelKey: "type" }]} legend />
-        <Text>Calorie goal for today: {sum}</Text>
+        <Text>Calorie goal for today: {selectedDate?.calories || "No record for the day"}</Text>
       </div>
     );
     //@@viewOff:render

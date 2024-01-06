@@ -1,5 +1,15 @@
 //@@viewOn:imports
-import { createComponent, Utils, useState, useSession, useDataList, useEffect, useRef, useDataObject } from "uu5g05";
+import {
+  createComponent,
+  Utils,
+  useState,
+  useSession,
+  useDataList,
+  useEffect,
+  useRef,
+  useDataObject,
+  useScreenSize,
+} from "uu5g05";
 import Config from "./config/config";
 import Context from "./yummyfit-context";
 import Calls from "calls";
@@ -19,6 +29,9 @@ const YummyFitProvider = createComponent({
   //@@viewOff:defaultProps
 
   render(props) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const [selectedDate, setSelectedDate] = useState(today);
     //@@viewOn:private
     const yummyFitDataList = useDataObject({
       handlerMap: {
@@ -73,13 +86,31 @@ const YummyFitProvider = createComponent({
         if (TodaysActivityList.handlerMap && typeof TodaysActivityList.handlerMap.load === "function") {
           try {
             await TodaysActivityList.handlerMap.load();
+            await yummyFitDataList.handlerMap.load();
           } catch (error) {
             console.log(error);
           }
         }
       }
       reloadData();
-    }, [TodaysActivityList]);
+    }, [TodaysActivityList, yummyFitDataList]);
+
+    //Function for finfing selected date, all black magic with date management
+    const findDataForSelectedDate = () => {
+      if (!yummyFitDataList.data?.list?.dailySummary) {
+        return null;
+      }
+
+      const offset = selectedDate.getTimezoneOffset();
+      const localSelectedDate = new Date(selectedDate.getTime() - offset * 60000);
+      const formattedSelectedDate = localSelectedDate.toISOString().split("T")[0];
+
+      return yummyFitDataList.data.list.dailySummary.find((item) => {
+        const localItemDate = new Date(new Date(item.date).getTime() - offset * 60000);
+        const itemDate = localItemDate.toISOString().split("T")[0];
+        return itemDate === formattedSelectedDate;
+      });
+    };
 
     // calls
     function handleLoad(dtoIn) {
@@ -126,6 +157,9 @@ const YummyFitProvider = createComponent({
       yummyFitActivityList,
       yummyFitAchievementsList,
       TodaysActivityList,
+      selectedDate,
+      setSelectedDate,
+      findDataForSelectedDate,
     };
 
     return (

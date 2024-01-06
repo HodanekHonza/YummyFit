@@ -1,14 +1,21 @@
 import { createVisualComponent, useState, useEffect, useMemo } from "uu5g05";
 import { UuDate } from "uu_i18ng01";
 import Uu5Elements from "uu5g05-elements";
-
+import { useYummyFit } from "../yummyfit-context.js";
 function withControlledInput(Calendar) {
   return (props) => {
     const { value: propsValue, onSelect } = props;
-    const [value, setValue] = useState(propsValue);
+
+    // Initialize value with propsValue, or today's date if propsValue is undefined
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to midnight
+    const initialValue = propsValue ? new Date(propsValue) : today;
+    const [value, setValue] = useState(initialValue);
+
+    const { selectedDate, setSelectedDate } = useYummyFit();
     useEffect(() => {
-      console.log(value);
-    }, [value]);
+      console.log(selectedDate);
+    }, [selectedDate]);
 
     return (
       <div>
@@ -17,7 +24,15 @@ function withControlledInput(Calendar) {
           value={new Date(value)}
           onSelect={(e) => {
             typeof onSelect === "function" && onSelect(e);
-            setValue(e.data.value);
+
+            // Create a new Date object from the selected date
+            const selectedDate = new Date(e.data.value);
+
+            // Reset the hours, minutes, seconds, and milliseconds to zero
+            selectedDate.setHours(0, 0, 0, 0);
+
+            setValue(selectedDate);
+            setSelectedDate(selectedDate);
           }}
         />
       </div>
