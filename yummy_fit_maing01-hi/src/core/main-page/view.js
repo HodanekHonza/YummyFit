@@ -1,8 +1,6 @@
 //@@viewOn:imports
-import { createVisualComponent, Environment, useSession } from "uu5g05";
-import Uu5Elements from "uu5g05-elements";
-import Uu5Forms from "uu5g05-forms";
-import { Button } from "uu5g05-elements";
+import { createVisualComponent, Environment, useSession, useCallback } from "uu5g05";
+import { useAlertBus } from "uu5g05-elements";
 import CalorieChart from "./calorie-chart.js";
 import Config from "./config/config.js";
 import ModalOnButton from "./modal-button.js";
@@ -57,6 +55,52 @@ const View = createVisualComponent({
       findDataForSelectedDate,
     } = useYummyFit();
 
+    const { addAlert } = useAlertBus();
+    const showError = useCallback(
+      async (error, header = "") => {
+        addAlert({
+          header,
+          message: error.message,
+          priority: "error",
+        });
+      },
+      [addAlert],
+    );
+
+    const createfood = useCallback(
+      async (id, quantifaier) => {
+        try {
+          TodaysActivityList.handlerMap.createItem({ id: id, duration: 1 });
+          addAlert({
+            message: `Activity ${"..."} has been created.`,
+            priority: "success",
+            durationMs: 2000,
+          });
+        } catch (error) {
+          View.logger.error("Error creating activity", error);
+          showError(error, "Activity create failed!");
+        }
+      },
+      [TodaysActivityList.handlerMap, addAlert, showError],
+    );
+
+    const deleteFood = useCallback(
+      async (id) => {
+        try {
+          TodaysActivityList.handlerMap.delete({ id: id });
+          addAlert({
+            message: `Activity ${"..."} has been deleted.`,
+            priority: "faileure",
+            durationMs: 2000,
+          });
+        } catch (error) {
+          View.logger.error("Error deleting activity", error);
+          showError(error, "Activity delete failed!");
+        }
+      },
+      [TodaysActivityList.handlerMap, addAlert, showError],
+    );
+
     //@@viewOn:render
     return (
       <>
@@ -80,8 +124,8 @@ const View = createVisualComponent({
             header="Add activity"
             content={yummyFitActivityList.data}
             todayData={TodaysActivityList.data}
-            create={TodaysActivityList.handlerMap.createItem}
-            deleteData={TodaysActivityList.handlerMap.delete}
+            create={createfood}
+            deleteData={deleteFood}
             size="xl"
           />
           {/* <ModalOnButton

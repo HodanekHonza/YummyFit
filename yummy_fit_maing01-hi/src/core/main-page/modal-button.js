@@ -7,27 +7,27 @@ const ModalOnButton = createVisualComponent({
 
     const [open, setOpen] = useState();
 
-    const createfood = useCallback(
-      async (id, quantifaier) => {
-        try {
-          create({ id: id, duration: 1 });
-        } catch (e) {
-          console.log(e);
-        }
-      },
-      [create],
-    );
+    // const createfood = useCallback(
+    //   async (id, quantifaier) => {
+    //     try {
+    //       create({ id: id, duration: 1 });
+    //     } catch (e) {
+    //       console.log(e);
+    //     }
+    //   },
+    //   [create],
+    // );
 
-    const deleteFood = useCallback(
-      async (id) => {
-        try {
-          deleteData({ id: id });
-        } catch (e) {
-          console.log(e);
-        }
-      },
-      [deleteData],
-    );
+    // const deleteFood = useCallback(
+    //   async (id) => {
+    //     try {
+    //       deleteData({ id: id });
+    //     } catch (e) {
+    //       console.log(e);
+    //     }
+    //   },
+    //   [deleteData],
+    // );
 
     return (
       <Fragment>
@@ -38,7 +38,7 @@ const ModalOnButton = createVisualComponent({
           <h2> {header}</h2>
           {content?.map((thing) => (
             <div key={thing.data._id}>
-              <button onClick={() => createfood(thing.data._id)}>
+              <button onClick={() => create(thing.data._id)}>
                 <div>
                   <p> {thing.data.name} </p>
                   <p> {thing.data.calorie} </p>
@@ -49,7 +49,7 @@ const ModalOnButton = createVisualComponent({
           <h2>Todays things</h2>
           {todayData?.map((activity) => (
             <div key={activity.data.id}>
-              <button onClick={() => deleteFood(activity.data.id)}>
+              <button onClick={() => deleteData(activity.data.id)}>
                 <div>
                   <p> {activity.data.uuIdentity} </p>
                   <p> {activity.data.creationDate} </p>
