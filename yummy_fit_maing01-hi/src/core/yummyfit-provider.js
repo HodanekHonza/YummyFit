@@ -57,11 +57,29 @@ const YummyFitProvider = createComponent({
     const TodaysActivityList = useDataList({
       handlerMap: {
         load: handleListTodayActivity,
-        update: handleCreateTodaysActivity,
+        createItem: handleCreateTodaysActivity,
         delete: handleDeleteTodaysActivity,
       },
       pageSize: 1,
     });
+
+    useEffect(() => {
+      async function reloadData() {
+        console.log(TodaysActivityList);
+        if (TodaysActivityList.state === "ready") {
+          return;
+        }
+
+        if (TodaysActivityList.handlerMap && typeof TodaysActivityList.handlerMap.load === "function") {
+          try {
+            await TodaysActivityList.handlerMap.load();
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      }
+      reloadData();
+    }, [TodaysActivityList]);
 
     // calls
     function handleLoad(dtoIn) {
@@ -84,8 +102,9 @@ const YummyFitProvider = createComponent({
       return Calls.YummyFit.createFood(dtoIn);
     }
 
-    function handleListTodayActivity(dtoIn) {
-      return Calls.YummyFit.loadTodaysActivity(dtoIn);
+    async function handleListTodayActivity(dtoIn) {
+      const activity = await Calls.YummyFit.loadTodaysActivity(dtoIn);
+      return activity;
     }
 
     function handleCreateActivity(dtoIn) {

@@ -57,7 +57,7 @@ const View = createVisualComponent({
     //   }
     // }
 
-    console.log(TodaysActivityList);
+    //console.log(TodaysActivityList);
 
     //@@viewOn:render
     return (
@@ -67,26 +67,26 @@ const View = createVisualComponent({
           {/* <ModalOnButton header="Choose date" colorScheme="primary" size="l" content={<DisplayDate />} /> */}
         </div>
         <div className={Css.main()}>
-          <ModalOnButton
+          {/* <ModalOnButton
             header="Add meal"
             // content={yummyFitFoodList.data}
             // create={yummyFitFoodList.handlerMap.create}
             size="xl"
-          />
+          /> */}
           <ModalOnButton
             header="Add activity"
             content={yummyFitActivityList.data}
             todayData={TodaysActivityList.data}
-            create={TodaysActivityList.handlerMap.update}
-            delete={TodaysActivityList.handlerMap.delete}
+            create={TodaysActivityList.handlerMap.createItem}
+            deleteData={TodaysActivityList.handlerMap.delete}
             size="xl"
           />
-          <ModalOnButton
+          {/* <ModalOnButton
             header="Add water"
             // content={yummyFitFoodList.data}
             // create={yummyFitFoodList.handlerMap.create}
             size="xl"
-          />
+          /> */}
         </div>
         <CalorieChart />
       </>
