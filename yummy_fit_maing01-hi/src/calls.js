@@ -56,16 +56,28 @@ const Calls = {
       const commandUri = Calls.getCommandUri("physicalActivity/create");
       return Calls.call("post", commandUri, dtoIn);
     },
-    createTodaysActivity(dtoIn) {
-      const commandUri = Calls.getCommandUri("physicalActivity/create");
-      return Calls.call("post", commandUri, dtoIn);
-    },
     loadTodaysActivity(dtoIn) {
       const commandUri = Calls.getCommandUri("physicalActivity/list");
       return Calls.call("get", commandUri, dtoIn);
     },
+    createTodaysActivity(dtoIn) {
+      const commandUri = Calls.getCommandUri("physicalActivity/create");
+      return Calls.call("post", commandUri, dtoIn);
+    },
     deleteTodaysActivity(dtoIn) {
       const commandUri = Calls.getCommandUri("physicalActivity/delete");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    loadTodaysFood(dtoIn) {
+      const commandUri = Calls.getCommandUri("calorieIntake/list");
+      return Calls.call("get", commandUri, dtoIn);
+    },
+    createTodaysFood(dtoIn) {
+      const commandUri = Calls.getCommandUri("calorieIntake/create");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    deleteTodaysFood(dtoIn) {
+      const commandUri = Calls.getCommandUri("calorieIntake/delete");
       return Calls.call("post", commandUri, dtoIn);
     },
   },

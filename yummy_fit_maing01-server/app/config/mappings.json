@@ -78,7 +78,7 @@
       },
       "calorieIntake/delete": {
         "realization": "api/controllers/CalorieIntakeController.delete",
-        "httpMethod": "DELETE",
+        "httpMethod": "POST",
         "type": "CMD"
       },
       "drinkingRegime/create": {

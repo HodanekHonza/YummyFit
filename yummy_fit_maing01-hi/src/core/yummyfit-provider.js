@@ -76,6 +76,15 @@ const YummyFitProvider = createComponent({
       pageSize: 1,
     });
 
+    const TodaysFoodList = useDataList({
+      handlerMap: {
+        load: handleListTodayFood,
+        createItem: handleCreateTodaysFood,
+        delete: handleDeleteTodaysFood,
+      },
+      pageSize: 1,
+    });
+
     useEffect(() => {
       async function reloadData() {
         console.log(TodaysActivityList);
@@ -94,6 +103,25 @@ const YummyFitProvider = createComponent({
       }
       reloadData();
     }, [TodaysActivityList, yummyFitDataList]);
+
+    useEffect(() => {
+      async function reloadData() {
+        console.log(TodaysFoodList);
+        if (TodaysFoodList.state === "ready") {
+          return;
+        }
+
+        if (TodaysFoodList.handlerMap && typeof TodaysFoodList.handlerMap.load === "function") {
+          try {
+            await TodaysFoodList.handlerMap.load();
+            await yummyFitDataList.handlerMap.load();
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      }
+      reloadData();
+    }, [yummyFitDataList, TodaysFoodList]);
 
     //Function for finfing selected date, all black magic with date management
     const findDataForSelectedDate = () => {
@@ -132,13 +160,24 @@ const YummyFitProvider = createComponent({
     function handleCreateFood(dtoIn) {
       return Calls.YummyFit.createFood(dtoIn);
     }
+    function handleCreateActivity(dtoIn) {
+      return Calls.YummyFit.createActivity(dtoIn);
+    }
+
+    function handleListTodayFood(dtoIn) {
+      return Calls.YummyFit.loadTodaysFood(dtoIn);
+    }
+
+    function handleCreateTodaysFood(dtoIn) {
+      return Calls.YummyFit.createTodaysFood(dtoIn);
+    }
+
+    function handleDeleteTodaysFood(dtoIn) {
+      return Calls.YummyFit.deleteTodaysFood(dtoIn);
+    }
 
     function handleListTodayActivity(dtoIn) {
       return Calls.YummyFit.loadTodaysActivity(dtoIn);
-    }
-
-    function handleCreateActivity(dtoIn) {
-      return Calls.YummyFit.createActivity(dtoIn);
     }
 
     function handleCreateTodaysActivity(dtoIn) {
@@ -156,6 +195,7 @@ const YummyFitProvider = createComponent({
       yummyFitActivityList,
       yummyFitAchievementsList,
       TodaysActivityList,
+      TodaysFoodList,
       selectedDate,
       setSelectedDate,
       findDataForSelectedDate,
