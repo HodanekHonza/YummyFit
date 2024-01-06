@@ -18,9 +18,7 @@ const ModalOnButtonCalendar = createVisualComponent({
             templateColumns={{ xs: "repeat(2, 1fr)", s: "repeat(2, auto)" }}
             columnGap={Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"])}
             justifyContent={{ s: "end" }}
-          >
-            {/* <Uu5Forms.SubmitButton icon="uugds-check">Confirm</Uu5Forms.SubmitButton> */}
-          </Uu5Elements.Grid>
+          ></Uu5Elements.Grid>
         </Modal>
       </Fragment>
     );

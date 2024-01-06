@@ -48,7 +48,6 @@ const CalorieChart = createVisualComponent({
         amount: selectedDate?.calories,
       },
     ];
-    console.log(selectedDate?.calories);
     //@@viewOff:private
 
     //@@viewOn:render

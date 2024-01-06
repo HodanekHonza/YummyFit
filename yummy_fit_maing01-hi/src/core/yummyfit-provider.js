@@ -133,9 +133,8 @@ const YummyFitProvider = createComponent({
       return Calls.YummyFit.createFood(dtoIn);
     }
 
-    async function handleListTodayActivity(dtoIn) {
-      const activity = await Calls.YummyFit.loadTodaysActivity(dtoIn);
-      return activity;
+    function handleListTodayActivity(dtoIn) {
+      return Calls.YummyFit.loadTodaysActivity(dtoIn);
     }
 
     function handleCreateActivity(dtoIn) {

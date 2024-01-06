@@ -56,17 +56,6 @@ const View = createVisualComponent({
       setSelectedDate,
       findDataForSelectedDate,
     } = useYummyFit();
-    // function loadContect() {
-    //   try {
-    //     yummyFitDataList.handlerMap.loadFood();
-    //   } catch (error) {
-    //     // We pass Error.Message instance to the Uu5Forms.Form that shows alert
-    //     //throw new Utils.Error.Message("list create failed!", error);
-    //     console.log(error);
-    //   }
-    // }
-
-    console.log(findDataForSelectedDate());
 
     //@@viewOn:render
     return (
