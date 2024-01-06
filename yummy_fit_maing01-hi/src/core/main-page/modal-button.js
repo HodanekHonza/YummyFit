@@ -1,33 +1,12 @@
-import { Fragment, createVisualComponent, useState, useCallback } from "uu5g05";
+import { Fragment, createVisualComponent, useState } from "uu5g05";
 import { Button, Modal } from "uu5g05-elements";
-import Uu5Elements from "uu5g05-elements";
+import FoodActivityList from "../../bricks/main-page/food-activity-list";
+import TodaysFoodActivityList from "../../bricks/main-page/todays-food-activity-list";
 const ModalOnButton = createVisualComponent({
-  render({ header, create, deleteData, content, todayData, ...props }) {
+  render({ header, create, deleteData, content, todayData, FoodOrActivity, ...props }) {
     /*@@viewOn:example*/
 
     const [open, setOpen] = useState();
-
-    // const createfood = useCallback(
-    //   async (id, quantifaier) => {
-    //     try {
-    //       create({ id: id, duration: 1 });
-    //     } catch (e) {
-    //       console.log(e);
-    //     }
-    //   },
-    //   [create],
-    // );
-
-    // const deleteFood = useCallback(
-    //   async (id) => {
-    //     try {
-    //       deleteData({ id: id });
-    //     } catch (e) {
-    //       console.log(e);
-    //     }
-    //   },
-    //   [deleteData],
-    // );
 
     return (
       <Fragment>
@@ -35,36 +14,18 @@ const ModalOnButton = createVisualComponent({
           {header}
         </Button>
         <Modal header={header} open={open} onClose={() => setOpen(false)}>
-          <h2> {header}</h2>
-          {content?.map((thing) => (
-            <div key={thing.data._id}>
-              <button onClick={() => create(thing.data._id)}>
-                <div>
-                  <p> {thing.data.name} </p>
-                  <p> {thing.data.calorie} </p>
-                </div>
-              </button>
-            </div>
-          ))}
-          <h2>Todays things</h2>
-          {todayData?.map((activity) => (
-            <div key={activity.data.id}>
-              <button onClick={() => deleteData(activity.data.id)}>
-                <div>
-                  <p> {activity.data.uuIdentity} </p>
-                  <p> {activity.data.creationDate} </p>
-                  <p> {activity.data.nameOfActivity} </p>
-                  <p> {activity.data.duration} </p>
-                  <p> {activity.data.calories} </p>
-                </div>
-              </button>
-            </div>
-          ))}
-          <Uu5Elements.Grid
-            templateColumns={{ xs: "repeat(2, 1fr)", s: "repeat(2, auto)" }}
-            columnGap={Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"])}
-            justifyContent={{ s: "end" }}
-          ></Uu5Elements.Grid>
+          <h2>{FoodOrActivity ? "Add Food to your day" : "Add Activity to your day"}</h2>
+          {FoodOrActivity ? (
+            <FoodActivityList create={create} list={content} FoodOrActivity={FoodOrActivity} />
+          ) : (
+            <FoodActivityList create={create} list={content} FoodOrActivity={FoodOrActivity} />
+          )}
+          <h3>{FoodOrActivity ? "Todays Food" : "Todays Activity"}</h3>
+          {FoodOrActivity ? (
+            <TodaysFoodActivityList deleteData={deleteData} list={todayData} foodOrActivity={FoodOrActivity} />
+          ) : (
+            <TodaysFoodActivityList deleteData={deleteData} list={todayData} foodOrActivity={FoodOrActivity} />
+          )}
         </Modal>
       </Fragment>
     );

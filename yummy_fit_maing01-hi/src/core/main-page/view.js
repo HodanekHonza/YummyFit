@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Environment, useSession, useCallback } from "uu5g05";
+import { createVisualComponent, useCallback } from "uu5g05";
 import { useAlertBus } from "uu5g05-elements";
 import CalorieChart from "./calorie-chart.js";
 import Config from "./config/config.js";
@@ -50,6 +50,7 @@ const View = createVisualComponent({
       yummyFitActivityList,
       yummyFitAchievementsList,
       TodaysActivityList,
+      TodaysFoodList,
       selectedDate,
       setSelectedDate,
       findDataForSelectedDate,
@@ -67,7 +68,7 @@ const View = createVisualComponent({
       [addAlert],
     );
 
-    const createfood = useCallback(
+    const createActivity = useCallback(
       async (id, quantifaier) => {
         try {
           TodaysActivityList.handlerMap.createItem({ id: id, duration: 1 });
@@ -84,13 +85,13 @@ const View = createVisualComponent({
       [TodaysActivityList.handlerMap, addAlert, showError],
     );
 
-    const deleteFood = useCallback(
+    const deleteActivity = useCallback(
       async (id) => {
         try {
           TodaysActivityList.handlerMap.delete({ id: id });
           addAlert({
             message: `Activity ${"..."} has been deleted.`,
-            priority: "faileure",
+            priority: "success",
             durationMs: 2000,
           });
         } catch (error) {
@@ -99,6 +100,40 @@ const View = createVisualComponent({
         }
       },
       [TodaysActivityList.handlerMap, addAlert, showError],
+    );
+
+    const createFood = useCallback(
+      async (id, quantifaier) => {
+        try {
+          TodaysFoodList.handlerMap.createItem({ id: id, quantity: 1 });
+          addAlert({
+            message: `Food ${"..."} has been created.`,
+            priority: "success",
+            durationMs: 2000,
+          });
+        } catch (error) {
+          View.logger.error("Error creating Food", error);
+          showError(error, "Food create failed!");
+        }
+      },
+      [TodaysFoodList.handlerMap, addAlert, showError],
+    );
+
+    const deleteFood = useCallback(
+      async (id) => {
+        try {
+          TodaysFoodList.handlerMap.delete({ id: id });
+          addAlert({
+            message: `Food ${"..."} has been deleted.`,
+            priority: "success",
+            durationMs: 2000,
+          });
+        } catch (error) {
+          View.logger.error("Error deleting Food", error);
+          showError(error, "Food delete failed!");
+        }
+      },
+      [TodaysFoodList.handlerMap, addAlert, showError],
     );
 
     //@@viewOn:render
@@ -114,18 +149,22 @@ const View = createVisualComponent({
           />
         </div>
         <div className={Css.main()}>
-          {/* <ModalOnButton
+          <ModalOnButton
             header="Add meal"
-            // content={yummyFitFoodList.data}
-            // create={yummyFitFoodList.handlerMap.create}
+            FoodOrActivity={true}
+            content={yummyFitFoodList.data}
+            todayData={TodaysFoodList.data}
+            create={createFood}
+            deleteData={deleteFood}
             size="xl"
-          /> */}
+          />
           <ModalOnButton
             header="Add activity"
+            FoodOrActivity={false}
             content={yummyFitActivityList.data}
             todayData={TodaysActivityList.data}
-            create={createfood}
-            deleteData={deleteFood}
+            create={createActivity}
+            deleteData={deleteActivity}
             size="xl"
           />
           {/* <ModalOnButton

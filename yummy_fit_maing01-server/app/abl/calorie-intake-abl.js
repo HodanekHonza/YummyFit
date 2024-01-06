@@ -105,7 +105,7 @@ class CalorieIntakeAbl {
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
     const list = await this.dao.list(today);
-    return { list, uuAppErrorMap };
+    return list;
   }
 
   async delete(dtoIn, session) {
