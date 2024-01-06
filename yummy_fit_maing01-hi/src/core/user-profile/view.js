@@ -1,8 +1,7 @@
 //@@viewOn:imports
-import { Utils, createVisualComponent, useSession, Lsi } from "uu5g05";
+import { createVisualComponent, useSession, Lsi } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
-import { withRoute } from "uu_plus4u5g02-app";
 import { Icon } from "uu5g05-elements";
 
 import Config from "./config/config.js";
@@ -14,19 +13,19 @@ import importLsi from "../../lsi/import-lsi.js";
 //@@viewOff:constants
 
 //@@viewOn:css
-const Css = {
-  icon: () =>
-    Config.Css.css({
-      fontSize: 48,
-      lineHeight: "1em",
-    }),
-};
+// const Css = {
+//   icon: () =>
+//     Config.Css.css({
+//       fontSize: 48,
+//       lineHeight: "1em",
+//     }),
+// };
 //@@viewOff:css
 
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-let UserProfile = createVisualComponent({
+const View = createVisualComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "UserProfile",
   //@@viewOff:statics
@@ -71,9 +70,7 @@ let UserProfile = createVisualComponent({
   },
 });
 
-UserProfile = withRoute(UserProfile, { authenticated: true });
-
 //@@viewOn:exports
-export { UserProfile };
-export default UserProfile;
+export { View as UserProfile };
+export default View;
 //@@viewOff:exports

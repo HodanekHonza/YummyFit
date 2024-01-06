@@ -4,7 +4,8 @@ import { useAlertBus } from "uu5g05-elements";
 import CalorieChart from "./calorie-chart.js";
 import Config from "./config/config.js";
 import ModalOnButton from "./modal-button.js";
-import ModalOnButtonCalendar from "./model-button-calendar.js";
+import ModalOnButtonCalendar from "./modal-button-calendar.js";
+import ModalOnButtonWater from "./modal-button-water.js";
 import DisplayDate from "./display-date.js";
 import { useYummyFit } from "../yummyfit-context.js";
 //@@viewOff:imports
@@ -167,12 +168,12 @@ const View = createVisualComponent({
             deleteData={deleteActivity}
             size="xl"
           />
-          {/* <ModalOnButton
+          <ModalOnButtonWater
             header="Add water"
             // content={yummyFitFoodList.data}
             // create={yummyFitFoodList.handlerMap.create}
             size="xl"
-          /> */}
+          />
         </div>
         <CalorieChart selectedDate={findDataForSelectedDate()} />
       </>

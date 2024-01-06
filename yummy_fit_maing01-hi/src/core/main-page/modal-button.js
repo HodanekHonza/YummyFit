@@ -15,17 +15,9 @@ const ModalOnButton = createVisualComponent({
         </Button>
         <Modal header={header} open={open} onClose={() => setOpen(false)}>
           <h2>{FoodOrActivity ? "Add Food to your day" : "Add Activity to your day"}</h2>
-          {FoodOrActivity ? (
-            <FoodActivityList create={create} list={content} FoodOrActivity={FoodOrActivity} />
-          ) : (
-            <FoodActivityList create={create} list={content} FoodOrActivity={FoodOrActivity} />
-          )}
+          <FoodActivityList create={create} list={content} FoodOrActivity={FoodOrActivity} />
           <h3>{FoodOrActivity ? "Todays Food" : "Todays Activity"}</h3>
-          {FoodOrActivity ? (
-            <TodaysFoodActivityList deleteData={deleteData} list={todayData} foodOrActivity={FoodOrActivity} />
-          ) : (
-            <TodaysFoodActivityList deleteData={deleteData} list={todayData} foodOrActivity={FoodOrActivity} />
-          )}
+          <TodaysFoodActivityList deleteData={deleteData} list={todayData} foodOrActivity={FoodOrActivity} />
         </Modal>
       </Fragment>
     );
