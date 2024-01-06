@@ -1,35 +1,34 @@
 import { Fragment, createVisualComponent, useState, useCallback } from "uu5g05";
 import { Button, Modal } from "uu5g05-elements";
 import Uu5Elements from "uu5g05-elements";
-import Uu5Forms from "uu5g05-forms";
 const ModalOnButton = createVisualComponent({
-  render({ header, ...props }) {
+  render({ header, create, deleteData, content, todayData, ...props }) {
     /*@@viewOn:example*/
-    console.log(props.todayData);
+    //console.log(todayData);
     const [open, setOpen] = useState();
 
     // Wrapped in useCallback
     const createfood = useCallback(
       async (id, quantifaier) => {
         try {
-          props.create({ id: id, duration: 1 });
+          create({ id: id, duration: 1 });
         } catch (e) {
           console.log(e);
         }
       },
-      [props.create],
+      [create],
     ); // Dependency on props.create
 
     // Wrapped in useCallback
     const deleteFood = useCallback(
       async (id) => {
         try {
-          props.delete({ id: id });
+          deleteData({ id: id });
         } catch (e) {
           console.log(e);
         }
       },
-      [props.delete],
+      [deleteData],
     ); // Dependency on props.delete
 
     return (
@@ -37,9 +36,9 @@ const ModalOnButton = createVisualComponent({
         <Button size={props.size} colorScheme={props.colorScheme} onClick={() => setOpen(true)}>
           {header}
         </Button>
-        <Modal {...props} header={header} open={open} onClose={() => setOpen(false)}>
+        <Modal header={header} open={open} onClose={() => setOpen(false)}>
           <h2>Choose Activity</h2>
-          {props.content?.map((thing) => (
+          {content?.map((thing) => (
             <div key={thing.data._id}>
               <button onClick={() => createfood(thing.data._id)}>
                 <div>
@@ -50,13 +49,13 @@ const ModalOnButton = createVisualComponent({
             </div>
           ))}
           <h2>Todays things</h2>
-          {props.todayData?.map((activity) => (
+          {todayData?.map((activity) => (
             <div key={activity.data.id}>
               <button onClick={() => deleteFood(activity.data.id)}>
                 <div>
                   <p> {activity.data.uuIdentity} </p>
                   <p> {activity.data.creationDate} </p>
-                  <p> {activity.data.idOfActivity} </p>
+                  <p> {activity.data.nameOfActivity} </p>
                   <p> {activity.data.duration} </p>
                   <p> {activity.data.calories} </p>
                 </div>
