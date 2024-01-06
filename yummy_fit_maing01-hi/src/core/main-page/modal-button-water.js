@@ -1,7 +1,7 @@
 import { Fragment, createVisualComponent, useState } from "uu5g05";
-import { Button, Modal } from "uu5g05-elements";
-const ModalOnButtonCalendar = createVisualComponent({
-  render({ header, create, deleteData, content, todayData, ...props }) {
+import { Button, Input, Modal } from "uu5g05-elements";
+const ModalOnButtonWater = createVisualComponent({
+  render({ header, content, ...props }) {
     /*@@viewOn:example*/
     //console.log(todayData);
     const [open, setOpen] = useState();
@@ -12,7 +12,7 @@ const ModalOnButtonCalendar = createVisualComponent({
           {header}
         </Button>
         <Modal header={header} open={open} onClose={() => setOpen(false)}>
-          {content}
+          <Input />
         </Modal>
       </Fragment>
     );
@@ -22,6 +22,6 @@ const ModalOnButtonCalendar = createVisualComponent({
 });
 
 //@@viewOn:exports
-export { ModalOnButtonCalendar as ModalOnButton };
-export default ModalOnButtonCalendar;
+export { ModalOnButtonWater };
+export default ModalOnButtonWater;
 //@@viewOff:exports

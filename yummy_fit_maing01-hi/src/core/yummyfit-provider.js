@@ -1,15 +1,5 @@
 //@@viewOn:imports
-import {
-  createComponent,
-  Utils,
-  useState,
-  useSession,
-  useDataList,
-  useEffect,
-  useRef,
-  useDataObject,
-  useScreenSize,
-} from "uu5g05";
+import { createComponent, useState, useDataList, useEffect, useDataObject } from "uu5g05";
 import Config from "./config/config";
 import Context from "./yummyfit-context";
 import Calls from "calls";

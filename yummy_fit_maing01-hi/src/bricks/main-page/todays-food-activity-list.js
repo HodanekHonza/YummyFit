@@ -12,7 +12,7 @@ const TodaysFoodActivityList = createVisualComponent({
                 <p> {activity.data.uuIdentity} </p>
                 <p> {activity.data.creationDate} </p>
                 <p> {foodOrActivity ? activity.data.idOdFood : activity.data.nameOfActivity} </p>
-                <p> {activity.data.duration} </p>
+                <p> {foodOrActivity ? activity.data.amount : activity.data.duration} </p>
                 <p> {activity.data.calories} </p>
               </div>
             </button>

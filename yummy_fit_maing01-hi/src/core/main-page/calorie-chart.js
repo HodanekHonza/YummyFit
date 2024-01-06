@@ -48,13 +48,25 @@ const CalorieChart = createVisualComponent({
         amount: selectedDate?.calories,
       },
     ];
+
+    const formatDate = (isoDateString) => {
+      if (!isoDateString) return "No record for the day";
+
+      const date = new Date(isoDateString);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1; // getMonth() is zero-based
+      const day = date.getDate();
+
+      // Format: YYYY-MM-DD (pad month and day with a leading zero if needed)
+      return `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+    };
     //@@viewOff:private
 
     //@@viewOn:render
     return (
       <div className={Css.main()}>
         <Uu5ChartsBricks.PieChart data={[data]} serieList={[{ valueKey: "amount", labelKey: "type" }]} legend />
-        <Text>Selected day: {selectedDate?.date || "No record for the day"}</Text>
+        <Text>Selected day: {formatDate(selectedDate?.date)}</Text>
         <Text>Calorie goal for today: {2200 - selectedDate?.calories || "No record for the day"}</Text>
         <Text>Total calorie consumed today: {selectedDate?.calories || "No record for the day"}</Text>
       </div>
