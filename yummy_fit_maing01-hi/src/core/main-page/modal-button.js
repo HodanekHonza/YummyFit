@@ -4,10 +4,9 @@ import Uu5Elements from "uu5g05-elements";
 const ModalOnButton = createVisualComponent({
   render({ header, create, deleteData, content, todayData, ...props }) {
     /*@@viewOn:example*/
-    //console.log(todayData);
+
     const [open, setOpen] = useState();
 
-    // Wrapped in useCallback
     const createfood = useCallback(
       async (id, quantifaier) => {
         try {
@@ -17,9 +16,8 @@ const ModalOnButton = createVisualComponent({
         }
       },
       [create],
-    ); // Dependency on props.create
+    );
 
-    // Wrapped in useCallback
     const deleteFood = useCallback(
       async (id) => {
         try {
@@ -29,7 +27,7 @@ const ModalOnButton = createVisualComponent({
         }
       },
       [deleteData],
-    ); // Dependency on props.delete
+    );
 
     return (
       <Fragment>
@@ -37,7 +35,7 @@ const ModalOnButton = createVisualComponent({
           {header}
         </Button>
         <Modal header={header} open={open} onClose={() => setOpen(false)}>
-          <h2>Choose Activity</h2>
+          <h2> {header}</h2>
           {content?.map((thing) => (
             <div key={thing.data._id}>
               <button onClick={() => createfood(thing.data._id)}>
@@ -66,9 +64,7 @@ const ModalOnButton = createVisualComponent({
             templateColumns={{ xs: "repeat(2, 1fr)", s: "repeat(2, auto)" }}
             columnGap={Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"])}
             justifyContent={{ s: "end" }}
-          >
-            {/* <Uu5Forms.SubmitButton icon="uugds-check">Confirm</Uu5Forms.SubmitButton> */}
-          </Uu5Elements.Grid>
+          ></Uu5Elements.Grid>
         </Modal>
       </Fragment>
     );

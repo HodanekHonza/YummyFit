@@ -1,4 +1,4 @@
-import { createVisualComponent, useState, useEffect, useMemo } from "uu5g05";
+import { createVisualComponent, useState } from "uu5g05";
 import { UuDate } from "uu_i18ng01";
 import Uu5Elements from "uu5g05-elements";
 import { useYummyFit } from "../yummyfit-context.js";
@@ -12,10 +12,7 @@ function withControlledInput(Calendar) {
     const initialValue = propsValue ? new Date(propsValue) : today;
     const [value, setValue] = useState(initialValue);
 
-    const { selectedDate, setSelectedDate } = useYummyFit();
-    useEffect(() => {
-      console.log(selectedDate);
-    }, [selectedDate]);
+    const { setSelectedDate } = useYummyFit();
 
     return (
       <div>
@@ -48,11 +45,7 @@ const DisplayDate = createVisualComponent({
 
     return (
       <div>
-        <Calendar
-          value={selectedRangeDate[0]}
-          selectionMode="single"
-          // onSelect={({ data }) => console.log(new Date(data.value))}
-        />
+        <Calendar value={selectedRangeDate[0]} selectionMode="single" />
       </div>
     );
   },
