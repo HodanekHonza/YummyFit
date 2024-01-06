@@ -6,6 +6,7 @@ import { Button } from "uu5g05-elements";
 import CalorieChart from "./calorie-chart.js";
 import Config from "./config/config.js";
 import ModalOnButton from "./modal-button.js";
+import ModalOnButtonCalendar from "./model-button-calendar.js";
 import DisplayDate from "./display-date.js";
 import { useYummyFit } from "../yummyfit-context.js";
 //@@viewOff:imports
@@ -45,8 +46,16 @@ const View = createVisualComponent({
   render() {
     //@@viewOn:private
     //@@viewOff:private
-    const { yummyFitDataList, yummyFitFoodList, yummyFitActivityList, yummyFitAchievementsList, TodaysActivityList } =
-      useYummyFit();
+    const {
+      yummyFitDataList,
+      yummyFitFoodList,
+      yummyFitActivityList,
+      yummyFitAchievementsList,
+      TodaysActivityList,
+      selectedDate,
+      setSelectedDate,
+      findDataForSelectedDate,
+    } = useYummyFit();
     // function loadContect() {
     //   try {
     //     yummyFitDataList.handlerMap.loadFood();
@@ -57,14 +66,19 @@ const View = createVisualComponent({
     //   }
     // }
 
-    //console.log(TodaysActivityList);
+    console.log(findDataForSelectedDate());
 
     //@@viewOn:render
     return (
       <>
         <div className={Css.main()}>
           {" "}
-          {/* <ModalOnButton header="Choose date" colorScheme="primary" size="l" content={<DisplayDate />} /> */}
+          <ModalOnButtonCalendar
+            header="Choose date"
+            colorScheme="primary"
+            size="l"
+            content={<DisplayDate setSelectedDate={setSelectedDate} selectedDate={selectedDate} />}
+          />
         </div>
         <div className={Css.main()}>
           {/* <ModalOnButton
@@ -88,7 +102,7 @@ const View = createVisualComponent({
             size="xl"
           /> */}
         </div>
-        <CalorieChart />
+        <CalorieChart selectedDate={findDataForSelectedDate()} />
       </>
     );
     //@@viewOff:render
@@ -99,28 +113,3 @@ const View = createVisualComponent({
 export { View };
 export default View;
 //@@viewOff:exports
-
-// [
-//   {
-//     "data": {
-//       "name": "run",
-//       "calorie": 300,
-//       "_id": "6591340b9d68fa242b923cc1"
-//     },
-//     "state": "ready",
-//     "errorData": null,
-//     "pendingData": null,
-//     "handlerMap": {}
-//   },
-//   {
-//     "data": {
-//       "name": "Banana",
-//       "calorie": 150,
-//       "_id": "65946709cc99456ae7ea1c1d"
-//     },
-//     "state": "ready",
-//     "errorData": null,
-//     "pendingData": null,
-//     "handlerMap": {}
-//   }
-// ]

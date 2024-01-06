@@ -6,16 +6,6 @@ import Config from "./config/config.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
-const data = [
-  {
-    type: "Calories remaining",
-    amount: 700,
-  },
-  {
-    type: "Achieved",
-    amount: 1400,
-  },
-];
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -45,18 +35,29 @@ const CalorieChart = createVisualComponent({
   //@@viewOn:defaultProps
   //@@viewOff:defaultProps
 
-  render() {
+  render(props) {
     //@@viewOn:private
-    const sum = data.reduce((accumulator, currentValue) => {
-      return accumulator + currentValue.amount;
-    }, 0);
+    const { selectedDate } = props;
+    const data = [
+      {
+        type: "Calories remaining",
+        amount: 2200 - selectedDate?.calories,
+      },
+      {
+        type: "Consumed",
+        amount: selectedDate?.calories,
+      },
+    ];
+    console.log(selectedDate?.calories);
     //@@viewOff:private
 
     //@@viewOn:render
     return (
       <div className={Css.main()}>
         <Uu5ChartsBricks.PieChart data={[data]} serieList={[{ valueKey: "amount", labelKey: "type" }]} legend />
-        <Text>Calorie goal for today: {sum}</Text>
+        <Text>Selected day: {selectedDate?.date || "No record for the day"}</Text>
+        <Text>Calorie goal for today: {2200 - selectedDate?.calories || "No record for the day"}</Text>
+        <Text>Total calorie consumed today: {selectedDate?.calories || "No record for the day"}</Text>
       </div>
     );
     //@@viewOff:render
