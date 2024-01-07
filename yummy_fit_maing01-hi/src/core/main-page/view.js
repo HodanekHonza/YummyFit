@@ -46,10 +46,8 @@ const View = createVisualComponent({
     //@@viewOn:private
     //@@viewOff:private
     const {
-      yummyFitDataList,
       yummyFitFoodList,
       yummyFitActivityList,
-      yummyFitAchievementsList,
       TodaysActivityList,
       TodaysFoodList,
       selectedDate,

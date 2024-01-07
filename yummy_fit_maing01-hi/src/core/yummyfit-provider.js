@@ -87,7 +87,6 @@ const YummyFitProvider = createComponent({
 
     useEffect(() => {
       async function reloadData() {
-        console.log(TodaysActivityList);
         if (TodaysActivityList.state === "ready") {
           return;
         }
@@ -106,7 +105,6 @@ const YummyFitProvider = createComponent({
 
     useEffect(() => {
       async function reloadData() {
-        console.log(TodaysFoodList);
         if (TodaysFoodList.state === "ready") {
           return;
         }
