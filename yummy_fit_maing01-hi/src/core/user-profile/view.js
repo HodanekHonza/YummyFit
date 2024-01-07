@@ -44,8 +44,8 @@ const View = createVisualComponent({
     const { identity } = useSession();
     //@@viewOff:private
     const userData = yummyFitDataList.data.list;
-    console.log(yummyFitAchievementsList.data);
-    console.log(identity);
+    // console.log(yummyFitAchievementsList.data);
+    // console.log(identity);
     //@@viewOn:interface
     //@@viewOff:interface
 

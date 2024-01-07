@@ -3,7 +3,6 @@ import Uu5Elements from "uu5g05-elements";
 const FoodActivityList = createVisualComponent({
   render({ create, list, FoodOrActivity }) {
     /*@@viewOn:example*/
-    console.log(list);
     return (
       <>
         {list?.map((thing) => (

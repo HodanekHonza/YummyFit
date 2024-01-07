@@ -3,7 +3,6 @@ import { Button, Modal } from "uu5g05-elements";
 const ModalOnButtonCalendar = createVisualComponent({
   render({ header, content, ...props }) {
     /*@@viewOn:example*/
-    //console.log(todayData);
     const [open, setOpen] = useState();
 
     return (

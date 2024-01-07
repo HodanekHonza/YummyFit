@@ -3,7 +3,6 @@ import Uu5Elements from "uu5g05-elements";
 const TodaysFoodActivityList = createVisualComponent({
   render({ deleteData, list, foodOrActivity }) {
     /*@@viewOn:example*/
-
     return (
       <>
         {list?.map((activity) => (

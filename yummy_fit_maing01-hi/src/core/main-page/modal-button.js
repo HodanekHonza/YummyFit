@@ -7,7 +7,6 @@ const ModalOnButton = createVisualComponent({
     /*@@viewOn:example*/
 
     const [open, setOpen] = useState();
-    const [foodOrActivityList, setFoodOrActivityList] = useState(false);
 
     return (
       <Fragment>
