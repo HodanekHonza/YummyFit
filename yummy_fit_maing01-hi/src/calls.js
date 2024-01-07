@@ -80,6 +80,10 @@ const Calls = {
       const commandUri = Calls.getCommandUri("calorieIntake/delete");
       return Calls.call("post", commandUri, dtoIn);
     },
+    createTodaysWater(dtoIn) {
+      const commandUri = Calls.getCommandUri("drinkingRegime/create");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
 
   getCommandUri(useCase, baseUri = Environment.appBaseUri) {

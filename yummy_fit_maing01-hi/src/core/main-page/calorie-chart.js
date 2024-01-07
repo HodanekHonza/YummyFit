@@ -67,8 +67,9 @@ const CalorieChart = createVisualComponent({
       <div className={Css.main()}>
         <Uu5ChartsBricks.PieChart data={[data]} serieList={[{ valueKey: "amount", labelKey: "type" }]} legend />
         <Text>Selected day: {formatDate(selectedDate?.date)}</Text>
-        <Text>Calorie goal for today: {2200 - selectedDate?.calories || "No record for the day"}</Text>
-        <Text>Total calorie consumed today: {selectedDate?.calories || "No record for the day"}</Text>
+        <Text>Calorie goal for today: {2200 - selectedDate?.calories || "No record for the day"} kcal</Text>
+        <Text>Total calorie consumed today: {selectedDate?.calories || "No record for the day"} kcal</Text>
+        <Text>Total water consumed today: {selectedDate?.waterIntake || "No record for the day"} ml</Text>
       </div>
     );
     //@@viewOff:render

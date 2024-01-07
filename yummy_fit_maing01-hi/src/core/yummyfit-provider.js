@@ -23,6 +23,8 @@ const YummyFitProvider = createComponent({
     today.setHours(0, 0, 0, 0);
     const [selectedDate, setSelectedDate] = useState(today);
     //@@viewOn:private
+
+    // loading user data
     const yummyFitDataList = useDataObject({
       handlerMap: {
         load: handleLoad,
@@ -71,6 +73,14 @@ const YummyFitProvider = createComponent({
         load: handleListTodayFood,
         createItem: handleCreateTodaysFood,
         delete: handleDeleteTodaysFood,
+      },
+      pageSize: 1,
+    });
+
+    const TodaysWaterList = useDataList({
+      handlerMap: {
+        load: handleListTodayFood, // here only for hook to work, no need to download water list data..
+        createItem: handleCreateTodaysWater,
       },
       pageSize: 1,
     });
@@ -178,6 +188,10 @@ const YummyFitProvider = createComponent({
       return Calls.YummyFit.deleteTodaysActivity(dtoIn);
     }
 
+    function handleCreateTodaysWater(dtoIn) {
+      return Calls.YummyFit.createTodaysWater(dtoIn);
+    }
+
     //@@viewOn:render
     const value = {
       yummyFitDataList,
@@ -189,6 +203,7 @@ const YummyFitProvider = createComponent({
       selectedDate,
       setSelectedDate,
       findDataForSelectedDate,
+      TodaysWaterList,
     };
 
     return (
