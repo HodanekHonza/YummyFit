@@ -3,7 +3,7 @@ import { createVisualComponent, useSession, Lsi } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import { Icon } from "uu5g05-elements";
-
+import { useYummyFit } from "../yummyfit-context.js";
 import Config from "./config/config.js";
 import WelcomeRow from "../../bricks/welcome-row.js";
 import importLsi from "../../lsi/import-lsi.js";
@@ -40,9 +40,12 @@ const View = createVisualComponent({
 
   render() {
     //@@viewOn:private
+    const { yummyFitDataList, yummyFitAchievementsList } = useYummyFit();
     const { identity } = useSession();
     //@@viewOff:private
-
+    const userData = yummyFitDataList.data.list;
+    console.log(yummyFitAchievementsList.data);
+    console.log(identity);
     //@@viewOn:interface
     //@@viewOff:interface
 
@@ -60,8 +63,11 @@ const View = createVisualComponent({
           )}
           <br />
           <Uu5Elements.Text category="story" segment="heading" type="h4">
-            Věk: 22 <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" /> <br /> Váha: 82kg{" "}
-            <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" />
+            Výška: {userData.height} cm <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" /> <br /> Váha:{" "}
+            {userData.weight} kg <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" />
+          </Uu5Elements.Text>
+          <Uu5Elements.Text category="story" segment="heading" type="h4">
+            Using YummyFit: {userData.personalAchievementsDaysCount} Days
           </Uu5Elements.Text>
         </WelcomeRow>
       </div>

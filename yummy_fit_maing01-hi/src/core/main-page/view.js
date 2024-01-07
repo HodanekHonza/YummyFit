@@ -55,6 +55,7 @@ const View = createVisualComponent({
       selectedDate,
       setSelectedDate,
       findDataForSelectedDate,
+      TodaysWaterList,
     } = useYummyFit();
 
     const { addAlert } = useAlertBus();
@@ -137,6 +138,23 @@ const View = createVisualComponent({
       [TodaysFoodList.handlerMap, addAlert, showError],
     );
 
+    const createWater = useCallback(
+      async (amount) => {
+        try {
+          TodaysWaterList.handlerMap.createItem({ waterAmount: amount });
+          addAlert({
+            message: `Water ${"..."} has been Added.`,
+            priority: "success",
+            durationMs: 2000,
+          });
+        } catch (error) {
+          View.logger.error("Error adding Water", error);
+          showError(error, "Water create failed!");
+        }
+      },
+      [TodaysWaterList.handlerMap, addAlert, showError],
+    );
+
     //@@viewOn:render
     return (
       <>
@@ -168,12 +186,7 @@ const View = createVisualComponent({
             deleteData={deleteActivity}
             size="xl"
           />
-          <ModalOnButtonWater
-            header="Add water"
-            // content={yummyFitFoodList.data}
-            // create={yummyFitFoodList.handlerMap.create}
-            size="xl"
-          />
+          <ModalOnButtonWater header="Add water" create={createWater} size="xl" />
         </div>
         <CalorieChart selectedDate={findDataForSelectedDate()} />
       </>
