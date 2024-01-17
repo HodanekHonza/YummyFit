@@ -57,14 +57,7 @@ const Spa = createVisualComponent({
 
     //@@viewOn:render
     return (
-      <div
-        style={{
-          backgroundImage: `url("https://e0.pxfuel.com/wallpapers/219/658/desktop-wallpaper-beige-solid-color-light-beige.jpg")`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-      >
+      <div style={{backgroundImage: 'url("https://img.freepik.com/free-photo/beige-soft-gradient-background-vintage-style_53876-108718.jpg?w=1060&t=st=1705495533~exp=1705496133~hmac=6ba78d0ac5581bef33bf09856db0cc1cd9c8cb1271fbd64b7376ab9850c2747a")', backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center",}}>
         <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
           <Uu5Elements.ModalBus>
             <YummyFitProvider>
