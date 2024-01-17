@@ -3,6 +3,7 @@ import { createVisualComponent } from "uu5g05";
 import Uu5ChartsBricks from "uu5chartsg01-bricks";
 import Config from "./config/config.js";
 import { Box, Grid } from "uu5g05-elements";
+import { useYummyFit } from "../yummyfit-context.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -23,8 +24,8 @@ const Css = {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      padding: 5
-    })
+      padding: 5,
+    }),
 };
 //@@viewOff:css
 
@@ -44,6 +45,7 @@ const CalorieChart = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
+    const { calculateDailyCalorieIntake } = useYummyFit();
     const { selectedDate } = props;
     const data = [
       {
@@ -71,9 +73,11 @@ const CalorieChart = createVisualComponent({
     const gridContent = (
       <>
         <Box className={Css.grid()}>Selected day: {formatDate(selectedDate?.date)}</Box>
-        <Box className={Css.grid()}>Remaining calories for today: {2200 - selectedDate?.calories || "No record"} kcal</Box>
+        <Box className={Css.grid()}>
+          Remaining calories for today: {calculateDailyCalorieIntake() - selectedDate?.calories || "No record"} kcal
+        </Box>
         <Box className={Css.grid()}>Total water consumed today: {selectedDate?.waterIntake || "No record"} ml</Box>
-        <Box className={Css.grid()}>Calorie Goal for today: 2200</Box>
+        <Box className={Css.grid()}>Calorie Goal for today: {calculateDailyCalorieIntake()}</Box>
       </>
     );
     //@@viewOff:private

@@ -1,5 +1,6 @@
 import { createVisualComponent } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
+import Uu5Forms from "uu5g05-forms";
 import Config from "../config/config.js";
 //@@viewOn:css
 const Css = {

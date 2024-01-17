@@ -140,6 +140,13 @@ const YummyFitProvider = createComponent({
       });
     };
 
+    function calculateDailyCalorieIntake() {
+      yummyFitDataList?.data?.list?.weight;
+      yummyFitDataList?.data?.list?.height;
+      const brm = 10 * yummyFitDataList?.data?.list?.weight + 6.25 * yummyFitDataList?.data?.list?.height;
+      return brm;
+    }
+
     // calls
     function handleLoad(dtoIn) {
       return Calls.YummyFit.load(dtoIn);
@@ -210,6 +217,7 @@ const YummyFitProvider = createComponent({
       setSelectedDate,
       findDataForSelectedDate,
       TodaysWaterList,
+      calculateDailyCalorieIntake,
     };
 
     return (
