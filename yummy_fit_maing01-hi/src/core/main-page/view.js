@@ -194,6 +194,7 @@ const View = createVisualComponent({
               <ModalOnButtonCalendar
                 header="Choose date"
                 colorScheme="primary"
+                significance="highlighted"
                 size="l"
                 content={<DisplayDate setSelectedDate={setSelectedDate} selectedDate={selectedDate} />}
               />
@@ -201,6 +202,7 @@ const View = createVisualComponent({
             <div className={Css.main()}>
               <ModalOnButton
                 header="Add meal"
+                significance="highlighted"
                 FoodOrActivity={true}
                 content={yummyFitFoodList.data}
                 todayData={TodaysFoodList.data}
@@ -210,6 +212,7 @@ const View = createVisualComponent({
               />
               <ModalOnButton
                 header="Add activity"
+                significance="highlighted"
                 FoodOrActivity={false}
                 content={yummyFitActivityList.data}
                 todayData={TodaysActivityList.data}
@@ -217,7 +220,7 @@ const View = createVisualComponent({
                 deleteData={deleteActivity}
                 size="xl"
               />
-              <ModalOnButtonWater header="Add water" create={createWater} size="xl" />
+              <ModalOnButtonWater header="Add water" significance="highlighted" create={createWater} size="xl" />
             </div>
             <CalorieChart selectedDate={findDataForSelectedDate()} />
           </div>

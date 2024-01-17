@@ -18,6 +18,13 @@ const Css = {
       justifyContent: "center",
       height: "60vh",
     }),
+  grid: () =>
+    Config.Css.css({
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 5
+    })
 };
 //@@viewOff:css
 
@@ -63,17 +70,10 @@ const CalorieChart = createVisualComponent({
 
     const gridContent = (
       <>
-        <Box className={Config.Css.css({ padding: 5 })}>Selected day: {formatDate(selectedDate?.date)}</Box>
-        <Box className={Config.Css.css({ padding: 5 })}>
-          Remaining calories for today: {2200 - selectedDate?.calories || "No record"} kcal
-        </Box>
-        {/* <Box className={Config.Css.css({ padding: 5 })}>
-          Total calorie consumed today: {selectedDate?.calories || "No record"} kcal
-        </Box> */}
-        <Box className={Config.Css.css({ padding: 5 })}>
-          Total water consumed today: {selectedDate?.waterIntake || "No record"} ml
-        </Box>
-        <Box className={Config.Css.css({ padding: 5 })}>Calorie Goal for today: 2200</Box>
+        <Box className={Css.grid()}>Selected day: {formatDate(selectedDate?.date)}</Box>
+        <Box className={Css.grid()}>Remaining calories for today: {2200 - selectedDate?.calories || "No record"} kcal</Box>
+        <Box className={Css.grid()}>Total water consumed today: {selectedDate?.waterIntake || "No record"} ml</Box>
+        <Box className={Css.grid()}>Calorie Goal for today: 2200</Box>
       </>
     );
     //@@viewOff:private
