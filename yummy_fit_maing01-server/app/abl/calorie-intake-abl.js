@@ -67,6 +67,7 @@ class CalorieIntakeAbl {
     const uuObject = {
       uuIdentity: uuIdentity,
       creationDate: today,
+      nameOfFood: item.name,
       idOdFood: dtoIn.id,
       amount: dtoIn.quantity,
       calories: totalCalories,

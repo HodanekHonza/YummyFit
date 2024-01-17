@@ -87,7 +87,7 @@ const View = createVisualComponent({
         try {
           TodaysActivityList.handlerMap.createItem({ id: id, duration: 1 });
           addAlert({
-            message: `Activity ${"..."} has been created.`,
+            message: `Activity has been created.`,
             priority: "success",
             durationMs: 2000,
           });
@@ -104,7 +104,7 @@ const View = createVisualComponent({
         try {
           TodaysActivityList.handlerMap.delete({ id: id });
           addAlert({
-            message: `Activity ${"..."} has been deleted.`,
+            message: `Activity has been deleted.`,
             priority: "success",
             durationMs: 2000,
           });
@@ -121,7 +121,7 @@ const View = createVisualComponent({
         try {
           TodaysFoodList.handlerMap.createItem({ id: id, quantity: 1 });
           addAlert({
-            message: `Food ${"..."} has been created.`,
+            message: `Food has been created.`,
             priority: "success",
             durationMs: 2000,
           });
@@ -138,7 +138,7 @@ const View = createVisualComponent({
         try {
           TodaysFoodList.handlerMap.delete({ id: id });
           addAlert({
-            message: `Food ${"..."} has been deleted.`,
+            message: `Food has been deleted.`,
             priority: "success",
             durationMs: 2000,
           });
@@ -155,7 +155,7 @@ const View = createVisualComponent({
         try {
           TodaysWaterList.handlerMap.createItem({ waterAmount: amount });
           addAlert({
-            message: `Water ${"..."} has been Added.`,
+            message: `Water has been Added.`,
             priority: "success",
             durationMs: 2000,
           });
@@ -172,7 +172,7 @@ const View = createVisualComponent({
         try {
           yummyFitDataList.handlerMap.create({ weight: weight, height: height });
           addAlert({
-            message: `User ${"..."} has been created.`,
+            message: `User has been created.`,
             priority: "success",
             durationMs: 2000,
           });

@@ -23,7 +23,7 @@ const ChooseWeightHeightForm = createVisualComponent({
                 columnGap={Uu5Elements.UuGds.SpacingPalette.getValue(["fixed", "c"])}
                 justifyContent={{ s: "end" }}
               >
-                <Uu5Forms.SubmitButton>Calculate</Uu5Forms.SubmitButton>
+                <Uu5Forms.SubmitButton>Set</Uu5Forms.SubmitButton>
               </Uu5Elements.Grid>
             }
           >
@@ -35,8 +35,8 @@ const ChooseWeightHeightForm = createVisualComponent({
                 marginBottom: 8,
               })}
             >
-              <Uu5Forms.FormNumber name="height" label="Height" required />
-              <Uu5Forms.FormNumber name="weight" label="Weight" required />
+              <Uu5Forms.FormNumber name="height" label="Height (cm)" required />
+              <Uu5Forms.FormNumber name="weight" label="Weight (kg)" required />
             </div>
           </Uu5Elements.Block>
         </Uu5Forms.Form>

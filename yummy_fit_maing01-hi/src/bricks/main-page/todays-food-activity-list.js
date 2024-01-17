@@ -30,25 +30,26 @@ const TodaysFoodActivityList = createVisualComponent({
       <>
         {list?.map((activity) => (
           <div key={activity.data.id} className={Css.main()}>
-            <button onClick={() => deleteData(activity.data.id)}>
-              <Uu5Elements.ListItem
-                className={Css.list()}
-                actionList={[
-                  {
-                    icon: "uugds-delete",
-                    children: "Delete",
-                    primary: true,
-                  },
-                ]}
-              >
+            <Uu5Elements.ListItem
+              className={Css.list()}
+              actionList={[
+                {
+                  icon: "uugds-delete",
+                  children: "Delete",
+                  primary: true,
+                  onClick: () => deleteData(activity.data.id),
+                },
+              ]}
+            >
+              <div style={{ gap: 2 }}>
                 <Uu5Elements.Text segment="title" bold={true}>
                   {" "}
-                  {foodOrActivity ? activity.data.idOdFood : activity.data.nameOfActivity}{" "}
+                  {foodOrActivity ? activity.data.nameOfFood : activity.data.nameOfActivity}{" "}
                 </Uu5Elements.Text>
-                <Uu5Elements.Text> {foodOrActivity ? activity.data.amount : activity.data.duration} </Uu5Elements.Text>
-                <Uu5Elements.Text> {activity.data.calories} </Uu5Elements.Text>
-              </Uu5Elements.ListItem>
-            </button>
+                <Uu5Elements.Text> </Uu5Elements.Text>{" "}
+                <Uu5Elements.Text> ({activity.data.calories}) kcal</Uu5Elements.Text>
+              </div>
+            </Uu5Elements.ListItem>
           </div>
         ))}
       </>
