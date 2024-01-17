@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, useCallback } from "uu5g05";
+import { createVisualComponent, useCallback, useEffect, useSession, useState } from "uu5g05";
 import { useAlertBus } from "uu5g05-elements";
 import CalorieChart from "./calorie-chart.js";
 import Config from "./config/config.js";
@@ -7,6 +7,7 @@ import ModalOnButton from "./modal-button.js";
 import ModalOnButtonCalendar from "./modal-button-calendar.js";
 import ModalOnButtonWater from "./modal-button-water.js";
 import DisplayDate from "./display-date.js";
+import ChooseWeightHeightForm from "./choose-weight-height-form.js";
 import { useYummyFit } from "../yummyfit-context.js";
 //@@viewOff:imports
 
@@ -46,6 +47,7 @@ const View = createVisualComponent({
     //@@viewOn:private
     //@@viewOff:private
     const {
+      yummyFitDataList,
       yummyFitFoodList,
       yummyFitActivityList,
       TodaysActivityList,
@@ -55,7 +57,8 @@ const View = createVisualComponent({
       findDataForSelectedDate,
       TodaysWaterList,
     } = useYummyFit();
-
+    const [userLoggedIn, setUserLoggedIn] = useState(true);
+    const { identity } = useSession();
     const { addAlert } = useAlertBus();
     const showError = useCallback(
       async (error, header = "") => {
@@ -67,6 +70,17 @@ const View = createVisualComponent({
       },
       [addAlert],
     );
+    useEffect(() => {
+      async function getUser() {
+        if (yummyFitDataList?.data?.list?.uuIdentity !== identity.uuIdentity) {
+          setUserLoggedIn(false);
+          console.log("failed checking user");
+        } else {
+          setUserLoggedIn(true);
+        }
+      }
+      getUser();
+    }, [yummyFitDataList?.data?.list?.uuIdentity, identity.uuIdentity]);
 
     const createActivity = useCallback(
       async (id, quantifaier) => {
@@ -153,40 +167,63 @@ const View = createVisualComponent({
       [TodaysWaterList.handlerMap, addAlert, showError],
     );
 
+    const createUser = useCallback(
+      async (weight, height) => {
+        try {
+          yummyFitDataList.handlerMap.create({ weight: weight, height: height });
+          addAlert({
+            message: `User ${"..."} has been created.`,
+            priority: "success",
+            durationMs: 2000,
+          });
+        } catch (error) {
+          View.logger.error("Error creating activity", error);
+          showError(error, "Activity create failed!");
+        }
+      },
+      [yummyFitDataList.handlerMap, addAlert, showError],
+    );
+
     //@@viewOn:render
     return (
       <>
-        <div className={Css.main()}>
-          {" "}
-          <ModalOnButtonCalendar
-            header="Choose date"
-            colorScheme="primary"
-            size="l"
-            content={<DisplayDate setSelectedDate={setSelectedDate} selectedDate={selectedDate} />}
-          />
-        </div>
-        <div className={Css.main()}>
-          <ModalOnButton
-            header="Add meal"
-            FoodOrActivity={true}
-            content={yummyFitFoodList.data}
-            todayData={TodaysFoodList.data}
-            create={createFood}
-            deleteData={deleteFood}
-            size="xl"
-          />
-          <ModalOnButton
-            header="Add activity"
-            FoodOrActivity={false}
-            content={yummyFitActivityList.data}
-            todayData={TodaysActivityList.data}
-            create={createActivity}
-            deleteData={deleteActivity}
-            size="xl"
-          />
-          <ModalOnButtonWater header="Add water" create={createWater} size="xl" />
-        </div>
-        <CalorieChart selectedDate={findDataForSelectedDate()} />
+        {userLoggedIn ? (
+          <div>
+            <div className={Css.main()}>
+              {" "}
+              <ModalOnButtonCalendar
+                header="Choose date"
+                colorScheme="primary"
+                size="l"
+                content={<DisplayDate setSelectedDate={setSelectedDate} selectedDate={selectedDate} />}
+              />
+            </div>
+            <div className={Css.main()}>
+              <ModalOnButton
+                header="Add meal"
+                FoodOrActivity={true}
+                content={yummyFitFoodList.data}
+                todayData={TodaysFoodList.data}
+                create={createFood}
+                deleteData={deleteFood}
+                size="xl"
+              />
+              <ModalOnButton
+                header="Add activity"
+                FoodOrActivity={false}
+                content={yummyFitActivityList.data}
+                todayData={TodaysActivityList.data}
+                create={createActivity}
+                deleteData={deleteActivity}
+                size="xl"
+              />
+              <ModalOnButtonWater header="Add water" create={createWater} size="xl" />
+            </div>
+            <CalorieChart selectedDate={findDataForSelectedDate()} />
+          </div>
+        ) : (
+          <ChooseWeightHeightForm create={createUser} />
+        )}
       </>
     );
     //@@viewOff:render

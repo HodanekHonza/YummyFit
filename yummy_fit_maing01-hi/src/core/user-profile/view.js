@@ -1,9 +1,11 @@
 //@@viewOn:imports
-import { createVisualComponent, useSession, Lsi, useEffect, useState } from "uu5g05";
+import { createVisualComponent, useSession, Lsi, useEffect, useState, useCallback } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
+import { useAlertBus } from "uu5g05-elements";
 import { Icon } from "uu5g05-elements";
 import { useYummyFit } from "../yummyfit-context.js";
+import ChooseWeightHeightForm from "../main-page/choose-weight-height-form.js";
 import Config from "./config/config.js";
 import WelcomeRow from "../../bricks/welcome-row.js";
 import importLsi from "../../lsi/import-lsi.js";
@@ -43,6 +45,52 @@ const View = createVisualComponent({
     const { yummyFitDataList } = useYummyFit();
     const [userLoggedIn, setUserLoggedIn] = useState(true);
     const { identity } = useSession();
+
+    const { addAlert } = useAlertBus();
+    const showError = useCallback(
+      async (error, header = "") => {
+        addAlert({
+          header,
+          message: error.message,
+          priority: "error",
+        });
+      },
+      [addAlert],
+    );
+
+    const createUser = useCallback(
+      async (weight, height) => {
+        try {
+          yummyFitDataList.handlerMap.create({ weight: weight, height: height });
+          addAlert({
+            message: `Weight and height has been set`,
+            priority: "success",
+            durationMs: 2000,
+          });
+        } catch (error) {
+          View.logger.error("Error creating activity", error);
+          showError(error, "Activity create failed!");
+        }
+      },
+      [yummyFitDataList.handlerMap, addAlert, showError],
+    );
+
+    const updateUser = useCallback(
+      async (weight, height) => {
+        try {
+          yummyFitDataList.handlerMap.update({ weight: weight, height: height });
+          addAlert({
+            message: `Weight and height has been set`,
+            priority: "success",
+            durationMs: 2000,
+          });
+        } catch (error) {
+          View.logger.error("Error creating activity", error);
+          showError(error, "Activity create failed!");
+        }
+      },
+      [yummyFitDataList.handlerMap, addAlert, showError],
+    );
     //@@viewOff:private
     //const userData = yummyFitDataList.data?.list || undefined;
     // console.log(yummyFitDataList.data.list.uuIdentity);
@@ -58,8 +106,8 @@ const View = createVisualComponent({
         }
       }
       getUser();
-    }, []);
-
+    }, [yummyFitDataList?.data?.list?.uuIdentity, identity.uuIdentity]);
+    console.log(yummyFitDataList);
     //@@viewOn:interface
     //@@viewOff:interface
 
@@ -80,18 +128,19 @@ const View = createVisualComponent({
               )}
               <br />
               <Uu5Elements.Text category="story" segment="heading" type="h4">
-                Výška: {yummyFitDataList.data?.list.height} cm{" "}
+                Výška: {yummyFitDataList?.data?.list?.height} cm{" "}
                 <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" /> <br /> Váha:{" "}
-                {yummyFitDataList.data?.list.weight} kg{" "}
+                {yummyFitDataList?.data?.list?.weight} kg{" "}
                 <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" />
               </Uu5Elements.Text>
+              <ChooseWeightHeightForm create={updateUser} />
               <Uu5Elements.Text category="story" segment="heading" type="h4">
-                Using YummyFit: {yummyFitDataList.data?.list.personalAchievementsDaysCount} Days
+                Using YummyFit: {yummyFitDataList?.data?.list?.personalAchievementsDaysCount} Days
               </Uu5Elements.Text>
             </WelcomeRow>{" "}
           </>
         ) : (
-          "hello"
+          <ChooseWeightHeightForm create={createUser} />
         )}
       </div>
     );

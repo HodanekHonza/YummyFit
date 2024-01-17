@@ -28,6 +28,8 @@ const YummyFitProvider = createComponent({
     const yummyFitDataList = useDataObject({
       handlerMap: {
         load: handleLoad,
+        create: handleCreateUser,
+        update: handleUpdateUser,
       },
       itemHandlerMap: {},
       pageSize: 1,
@@ -85,16 +87,6 @@ const YummyFitProvider = createComponent({
       pageSize: 1,
     });
 
-    // useEffect(() => {
-    //   async function getUser() {
-    //     const data = await yummyFitDataList.handlerMap.load();
-    //     if (!data) {
-    //       console.log("failed checking user");
-    //     }
-    //   }
-    //   getUser();
-    // }, []);
-
     useEffect(() => {
       async function reloadData() {
         if (TodaysActivityList.state === "ready") {
@@ -151,6 +143,12 @@ const YummyFitProvider = createComponent({
     // calls
     function handleLoad(dtoIn) {
       return Calls.YummyFit.load(dtoIn);
+    }
+    function handleCreateUser(dtoIn) {
+      return Calls.YummyFit.createUser(dtoIn);
+    }
+    function handleUpdateUser(dtoIn) {
+      return Calls.YummyFit.updateUser(dtoIn);
     }
 
     function handleLoadFood(dtoIn) {

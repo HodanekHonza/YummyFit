@@ -79,7 +79,9 @@ class UserProfileAbl {
       $set: { weight: dtoIn.weight, height: dtoIn.height },
     };
     await this.dao.update(uuIdentity, null, updateAchi);
-    return uuIdentity;
+    const list = await this.dao.get(uuIdentity);
+    const uuObject = { list };
+    return uuObject;
   }
 }
 
