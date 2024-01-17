@@ -20,7 +20,7 @@ const ModalOnButtonWater = createVisualComponent({
 
     return (
       <Fragment>
-        <Button size={props.size} colorScheme={props.colorScheme} onClick={() => setOpen(true)}>
+        <Button significance={props.significance} size={props.size} colorScheme={props.colorScheme} onClick={() => setOpen(true)}>
           {header}
         </Button>
         <Modal header={header} open={open} onClose={() => setOpen(false)}>
