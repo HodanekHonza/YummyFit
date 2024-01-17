@@ -85,6 +85,16 @@ const YummyFitProvider = createComponent({
       pageSize: 1,
     });
 
+    // useEffect(() => {
+    //   async function getUser() {
+    //     const data = await yummyFitDataList.handlerMap.load();
+    //     if (!data) {
+    //       console.log("failed checking user");
+    //     }
+    //   }
+    //   getUser();
+    // }, []);
+
     useEffect(() => {
       async function reloadData() {
         if (TodaysActivityList.state === "ready") {

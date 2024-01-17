@@ -9,6 +9,10 @@ class UserProfileController {
   get(ucEnv) {
     return UserProfileAbl.get(ucEnv.getDtoIn(), ucEnv.getSession());
   }
+
+  update(ucEnv) {
+    return UserProfileAbl.update(ucEnv.getDtoIn(), ucEnv.getSession());
+  }
 }
 
 module.exports = new UserProfileController();

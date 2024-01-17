@@ -61,6 +61,26 @@ class UserProfileAbl {
 
     return { list, uuAppErrorMap };
   }
+
+  async update(dtoIn, session) {
+    let uuAppErrorMap = {};
+    // validation of dtoIn
+    // const validationResult = this.validator.validate("userProfileGetDtoInType", dtoIn);
+    // uuAppErrorMap = ValidationHelper.processValidationResult(
+    //   dtoIn,
+    //   validationResult,
+    //   uuAppErrorMap,
+    //   Warnings.UserProfile.UnsupportedKeys.code,
+    //   Errors.UserProfile.InvalidDtoIn
+    // );
+    const uuIdentity = session.getIdentity().getUuIdentity();
+    //const userProfile = await this.userProfileDao.get(uuIdentity);
+    const updateAchi = {
+      $set: { weight: dtoIn.weight, height: dtoIn.height },
+    };
+    await this.dao.update(uuIdentity, null, updateAchi);
+    return uuIdentity;
+  }
 }
 
 module.exports = new UserProfileAbl();
