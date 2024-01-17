@@ -46,6 +46,10 @@
         "sysStateList": ["active"],
         "profileList": ["Executives"]
       },
+      "userProfile/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Executives"]
+      },
       "physicalActivity/create": {
         "sysStateList": ["active"],
         "profileList": ["Executives"]

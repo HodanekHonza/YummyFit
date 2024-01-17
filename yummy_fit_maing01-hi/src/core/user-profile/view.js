@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, useSession, Lsi } from "uu5g05";
+import { createVisualComponent, useSession, Lsi, useEffect, useState } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import { Icon } from "uu5g05-elements";
@@ -40,36 +40,59 @@ const View = createVisualComponent({
 
   render() {
     //@@viewOn:private
-    const { yummyFitDataList, yummyFitAchievementsList } = useYummyFit();
+    const { yummyFitDataList } = useYummyFit();
+    const [userLoggedIn, setUserLoggedIn] = useState(true);
     const { identity } = useSession();
     //@@viewOff:private
-    const userData = yummyFitDataList.data.list;
-    // console.log(yummyFitAchievementsList.data);
-    // console.log(identity);
+    //const userData = yummyFitDataList.data?.list || undefined;
+    // console.log(yummyFitDataList.data.list.uuIdentity);
+    // console.log(identity.uuIdentity)
+
+    useEffect(() => {
+      async function getUser() {
+        if (yummyFitDataList?.data?.list?.uuIdentity !== identity.uuIdentity) {
+          setUserLoggedIn(false);
+          console.log("failed checking user");
+        } else {
+          setUserLoggedIn(true);
+        }
+      }
+      getUser();
+    }, []);
+
     //@@viewOn:interface
     //@@viewOff:interface
 
     //@@viewOn:render
     return (
       <div>
-        <WelcomeRow left={<Plus4U5Elements.PersonPhoto size="xl" borderRadius="none" />}>
-          <Uu5Elements.Text category="story" segment="heading" type="h2">
-            <Lsi import={importLsi} path={["Home", "welcome"]} />
-          </Uu5Elements.Text>
-          {identity && (
-            <Uu5Elements.Text category="story" segment="heading" type="h2">
-              {identity.name}
-            </Uu5Elements.Text>
-          )}
-          <br />
-          <Uu5Elements.Text category="story" segment="heading" type="h4">
-            Výška: {userData.height} cm <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" /> <br /> Váha:{" "}
-            {userData.weight} kg <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" />
-          </Uu5Elements.Text>
-          <Uu5Elements.Text category="story" segment="heading" type="h4">
-            Using YummyFit: {userData.personalAchievementsDaysCount} Days
-          </Uu5Elements.Text>
-        </WelcomeRow>
+        {userLoggedIn ? (
+          <>
+            {" "}
+            <WelcomeRow left={<Plus4U5Elements.PersonPhoto size="xl" borderRadius="none" />}>
+              <Uu5Elements.Text category="story" segment="heading" type="h2">
+                <Lsi import={importLsi} path={["Home", "welcome"]} />
+              </Uu5Elements.Text>
+              {identity && (
+                <Uu5Elements.Text category="story" segment="heading" type="h2">
+                  {identity.name}
+                </Uu5Elements.Text>
+              )}
+              <br />
+              <Uu5Elements.Text category="story" segment="heading" type="h4">
+                Výška: {yummyFitDataList.data?.list.height} cm{" "}
+                <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" /> <br /> Váha:{" "}
+                {yummyFitDataList.data?.list.weight} kg{" "}
+                <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" />
+              </Uu5Elements.Text>
+              <Uu5Elements.Text category="story" segment="heading" type="h4">
+                Using YummyFit: {yummyFitDataList.data?.list.personalAchievementsDaysCount} Days
+              </Uu5Elements.Text>
+            </WelcomeRow>{" "}
+          </>
+        ) : (
+          "hello"
+        )}
       </div>
     );
     //@@viewOff:render

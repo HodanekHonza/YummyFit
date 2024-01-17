@@ -51,6 +51,11 @@
         "httpMethod": "GET",
         "type": "CMD"
       },
+      "userProfile/update": {
+        "realization": "api/controllers/UserProfileController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
       "physicalActivity/create": {
         "realization": "api/controllers/PhysicalActivityController.create",
         "httpMethod": "POST",

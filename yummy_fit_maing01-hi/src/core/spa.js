@@ -57,13 +57,22 @@ const Spa = createVisualComponent({
 
     //@@viewOn:render
     return (
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
-        <Uu5Elements.ModalBus>
-          <YummyFitProvider>
-            <Plus4U5App.Spa routeMap={ROUTE_MAP} />
-          </YummyFitProvider>
-        </Uu5Elements.ModalBus>
-      </Plus4U5.SpaProvider>
+      <div
+        style={{
+          backgroundImage: `url("https://e0.pxfuel.com/wallpapers/219/658/desktop-wallpaper-beige-solid-color-light-beige.jpg")`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+      >
+        <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
+          <Uu5Elements.ModalBus>
+            <YummyFitProvider>
+              <Plus4U5App.Spa routeMap={ROUTE_MAP} />
+            </YummyFitProvider>
+          </Uu5Elements.ModalBus>
+        </Plus4U5.SpaProvider>
+      </div>
     );
     //@@viewOff:render
   },
