@@ -1,8 +1,8 @@
 //@@viewOn:imports
 import { createVisualComponent } from "uu5g05";
-import { Text } from "uu5g05-elements";
 import Uu5ChartsBricks from "uu5chartsg01-bricks";
 import Config from "./config/config.js";
+import { Box, Grid } from "uu5g05-elements";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -60,17 +60,22 @@ const CalorieChart = createVisualComponent({
       // Format: YYYY-MM-DD (pad month and day with a leading zero if needed)
       return `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
     };
+
+    const gridContent = (
+      <>
+        <Box className={Config.Css.css({ padding: 5 })}>Remaining calories for today: {2200 - selectedDate?.calories || "No record"} kcal</Box>
+        <Box className={Config.Css.css({ padding: 5 })}>Total calorie consumed today: {selectedDate?.calories || "No record"} kcal</Box>
+        <Box className={Config.Css.css({ padding: 5 })}>Total water consumed today: {selectedDate?.waterIntake || "No record"} ml</Box>
+        <Box className={Config.Css.css({ padding: 5 })}>Calorie Goal for today: 2200</Box>
+      </>
+    );
     //@@viewOff:private
 
     //@@viewOn:render
     return (
       <div className={Css.main()}>
-        <Uu5ChartsBricks.PieChart data={[data]} serieList={[{ valueKey: "amount", labelKey: "type" }]} legend />
-        <Text>Selected day: {formatDate(selectedDate?.date)}</Text>
-        <Text>Remaining calories for today: {2200 - selectedDate?.calories || "No record for the day"} kcal</Text>
-        <Text>Calorie Goal for today: 2200</Text>
-        <Text>Total calorie consumed today: {selectedDate?.calories || "No record for the day"} kcal</Text>
-        <Text>Total water consumed today: {selectedDate?.waterIntake || "No record for the day"} ml</Text>
+        <Uu5ChartsBricks.PieChart className={Config.Css.css({ paddingBottom: 10 })} data={[data]} serieList={[{ valueKey: "amount", labelKey: "type" }]} legend />
+        <Grid rowGap={8}>{gridContent}</Grid>
       </div>
     );
     //@@viewOff:render
