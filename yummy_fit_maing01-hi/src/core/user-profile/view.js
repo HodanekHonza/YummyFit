@@ -9,6 +9,7 @@ import ChooseWeightHeightForm from "../main-page/choose-weight-height-form.js";
 import Config from "./config/config.js";
 import WelcomeRow from "../../bricks/welcome-row.js";
 import importLsi from "../../lsi/import-lsi.js";
+import ModalOnButtonSelectStats from "../main-page/modal-button-select-stats.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -85,16 +86,13 @@ const View = createVisualComponent({
             durationMs: 2000,
           });
         } catch (error) {
-          View.logger.error("Error creating activity", error);
-          showError(error, "Activity create failed!");
+          View.logger.error("Error updating user", error);
+          showError(error, "User update failed!");
         }
       },
       [yummyFitDataList.handlerMap, addAlert, showError],
     );
     //@@viewOff:private
-    //const userData = yummyFitDataList.data?.list || undefined;
-    // console.log(yummyFitDataList.data.list.uuIdentity);
-    // console.log(identity.uuIdentity)
 
     useEffect(() => {
       async function getUser() {
@@ -117,7 +115,7 @@ const View = createVisualComponent({
         {userLoggedIn ? (
           <>
             {" "}
-            <WelcomeRow left={<Plus4U5Elements.PersonPhoto size="xl" borderRadius="none" />}>
+            <WelcomeRow>
               <Uu5Elements.Text category="story" segment="heading" type="h2">
                 <Lsi import={importLsi} path={["Home", "welcome"]} />
               </Uu5Elements.Text>
@@ -128,12 +126,15 @@ const View = createVisualComponent({
               )}
               <br />
               <Uu5Elements.Text category="story" segment="heading" type="h4">
-                Výška: {yummyFitDataList?.data?.list?.height} cm{" "}
-                <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" /> <br /> Váha:{" "}
-                {yummyFitDataList?.data?.list?.weight} kg{" "}
-                <Icon icon="uugds-pencil" colorScheme="primary" tooltip="Edit" />
+                Výška: {yummyFitDataList?.data?.list?.height} cm <br /> Váha: {yummyFitDataList?.data?.list?.weight} kg{" "}
               </Uu5Elements.Text>
-              <ChooseWeightHeightForm create={updateUser} />
+              <ModalOnButtonSelectStats
+                header="Change weight and height"
+                colorScheme="primary"
+                size="l"
+                content={<ChooseWeightHeightForm create={updateUser} />}
+              />
+
               <Uu5Elements.Text category="story" segment="heading" type="h4">
                 Using YummyFit: {yummyFitDataList?.data?.list?.personalAchievementsDaysCount} Days
               </Uu5Elements.Text>

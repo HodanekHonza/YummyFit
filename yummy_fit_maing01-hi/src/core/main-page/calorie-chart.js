@@ -63,9 +63,16 @@ const CalorieChart = createVisualComponent({
 
     const gridContent = (
       <>
-        <Box className={Config.Css.css({ padding: 5 })}>Remaining calories for today: {2200 - selectedDate?.calories || "No record"} kcal</Box>
-        <Box className={Config.Css.css({ padding: 5 })}>Total calorie consumed today: {selectedDate?.calories || "No record"} kcal</Box>
-        <Box className={Config.Css.css({ padding: 5 })}>Total water consumed today: {selectedDate?.waterIntake || "No record"} ml</Box>
+        <Box className={Config.Css.css({ padding: 5 })}>Selected day: {formatDate(selectedDate?.date)}</Box>
+        <Box className={Config.Css.css({ padding: 5 })}>
+          Remaining calories for today: {2200 - selectedDate?.calories || "No record"} kcal
+        </Box>
+        {/* <Box className={Config.Css.css({ padding: 5 })}>
+          Total calorie consumed today: {selectedDate?.calories || "No record"} kcal
+        </Box> */}
+        <Box className={Config.Css.css({ padding: 5 })}>
+          Total water consumed today: {selectedDate?.waterIntake || "No record"} ml
+        </Box>
         <Box className={Config.Css.css({ padding: 5 })}>Calorie Goal for today: 2200</Box>
       </>
     );
@@ -74,7 +81,12 @@ const CalorieChart = createVisualComponent({
     //@@viewOn:render
     return (
       <div className={Css.main()}>
-        <Uu5ChartsBricks.PieChart className={Config.Css.css({ paddingBottom: 10 })} data={[data]} serieList={[{ valueKey: "amount", labelKey: "type" }]} legend />
+        <Uu5ChartsBricks.PieChart
+          className={Config.Css.css({ paddingBottom: 10 })}
+          data={[data]}
+          serieList={[{ valueKey: "amount", labelKey: "type" }]}
+          legend
+        />
         <Grid rowGap={8}>{gridContent}</Grid>
       </div>
     );

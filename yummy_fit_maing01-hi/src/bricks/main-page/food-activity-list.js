@@ -42,7 +42,7 @@ const FoodActivityList = createVisualComponent({
             >
               <p> {FoodOrActivity ? thing.name : thing?.data?.name} </p>
               {"    "}
-              <p>( {FoodOrActivity ? thing.calorie : thing?.data?.calorie} )kcal</p>
+              <p>({FoodOrActivity ? thing.calorie : thing?.data?.calorie})kcal</p>
             </Uu5Elements.ListItem>
           </div>
         ))}
