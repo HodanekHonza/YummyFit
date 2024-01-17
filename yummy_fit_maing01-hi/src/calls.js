@@ -84,6 +84,14 @@ const Calls = {
       const commandUri = Calls.getCommandUri("drinkingRegime/create");
       return Calls.call("post", commandUri, dtoIn);
     },
+    createUser(dtoIn) {
+      const commandUri = Calls.getCommandUri("userProfile/create");
+      return Calls.call("post", commandUri, dtoIn);
+    },
+    updateUser(dtoIn) {
+      const commandUri = Calls.getCommandUri("userProfile/update");
+      return Calls.call("post", commandUri, dtoIn);
+    },
   },
 
   getCommandUri(useCase, baseUri = Environment.appBaseUri) {
