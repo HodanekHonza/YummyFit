@@ -35,7 +35,7 @@ const ChooseWeightHeightForm = createVisualComponent({
                 marginBottom: 8,
               })}
             >
-              <Uu5Forms.FormNumber name="height" label="Height (cm)" required />
+              <Uu5Forms.FormNumber name="height" label="Height (cm)" value={2} required />
               <Uu5Forms.FormNumber name="weight" label="Weight (kg)" required />
             </div>
           </Uu5Elements.Block>

@@ -1,4 +1,4 @@
-import { createVisualComponent } from "uu5g05";
+import { createVisualComponent, useState } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Forms from "uu5g05-forms";
 import Config from "../config/config.js";
@@ -19,12 +19,13 @@ const Css = {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
-      width: 400,
+      width: 500,
     }),
 };
 //@@viewOff:css
 const FoodActivityList = createVisualComponent({
   render({ create, list, FoodOrActivity }) {
+    const [inputValue, setInputValue] = useState(1);
     /*@@viewOn:example*/
     return (
       <>
@@ -37,13 +38,22 @@ const FoodActivityList = createVisualComponent({
                   icon: "uugds-plus",
                   children: "Add",
                   primary: true,
-                  onClick: () => create(FoodOrActivity ? thing?._id : thing?.data?._id),
+                  onClick: FoodOrActivity
+                    ? () => create(thing?._id, inputValue)
+                    : () => create(thing?.data?._id, inputValue),
                 },
               ]}
             >
-              <p> {FoodOrActivity ? thing.name : thing?.data?.name} </p>
-              {"    "}
-              <p>({FoodOrActivity ? thing.calorie : thing?.data?.calorie})kcal</p>
+              <div style={{ gap: 2 }}>
+                <p> {FoodOrActivity ? thing.name : thing?.data?.name} </p>
+                <input
+                  type="number"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(parseInt(e.target.value, 10) || 0)}
+                />
+                {"    "}
+                <p>({FoodOrActivity ? thing.calorie * inputValue : thing?.data?.calorie * inputValue})kcal</p>
+              </div>
             </Uu5Elements.ListItem>
           </div>
         ))}

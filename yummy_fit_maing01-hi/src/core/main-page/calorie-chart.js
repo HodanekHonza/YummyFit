@@ -50,7 +50,7 @@ const CalorieChart = createVisualComponent({
     const data = [
       {
         type: "Calories remaining",
-        amount: 2200 - selectedDate?.calories,
+        amount: calculateDailyCalorieIntake() - selectedDate?.calories,
       },
       {
         type: "Consumed",

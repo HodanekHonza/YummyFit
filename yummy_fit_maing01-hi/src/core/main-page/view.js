@@ -85,7 +85,7 @@ const View = createVisualComponent({
     const createActivity = useCallback(
       async (id, quantifaier) => {
         try {
-          TodaysActivityList.handlerMap.createItem({ id: id, duration: 1 });
+          TodaysActivityList.handlerMap.createItem({ id: id, duration: quantifaier });
           addAlert({
             message: `Activity has been created.`,
             priority: "success",
@@ -119,7 +119,7 @@ const View = createVisualComponent({
     const createFood = useCallback(
       async (id, quantifaier) => {
         try {
-          TodaysFoodList.handlerMap.createItem({ id: id, quantity: 1 });
+          TodaysFoodList.handlerMap.createItem({ id: id, quantity: quantifaier });
           addAlert({
             message: `Food has been created.`,
             priority: "success",
