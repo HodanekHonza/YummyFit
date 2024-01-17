@@ -1,28 +1,30 @@
 //@@viewOn:imports
 import { createVisualComponent, useSession, Lsi, useEffect, useState, useCallback } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
-import Plus4U5Elements from "uu_plus4u5g02-elements";
 import { useAlertBus } from "uu5g05-elements";
-import { Icon } from "uu5g05-elements";
 import { useYummyFit } from "../yummyfit-context.js";
+import ModalOnButtonSelectStats from "../main-page/modal-button-select-stats.js";
 import ChooseWeightHeightForm from "../main-page/choose-weight-height-form.js";
 import Config from "./config/config.js";
 import WelcomeRow from "../../bricks/welcome-row.js";
 import importLsi from "../../lsi/import-lsi.js";
-import ModalOnButtonSelectStats from "../main-page/modal-button-select-stats.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
 //@@viewOff:constants
 
 //@@viewOn:css
-// const Css = {
-//   icon: () =>
-//     Config.Css.css({
-//       fontSize: 48,
-//       lineHeight: "1em",
-//     }),
-// };
+const Css = {
+  main: () =>
+    Config.Css.css({
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: "20px",
+      gap: "10px",
+    }),
+};
 //@@viewOff:css
 
 //@@viewOn:helpers
@@ -113,7 +115,7 @@ const View = createVisualComponent({
     return (
       <div>
         {userLoggedIn ? (
-          <>
+          <div className={Css.main()}>
             {" "}
             <WelcomeRow>
               <Uu5Elements.Text category="story" segment="heading" type="h2">
@@ -124,22 +126,25 @@ const View = createVisualComponent({
                   {identity.name}
                 </Uu5Elements.Text>
               )}
+              <Uu5Elements.Text category="story" segment="heading" type="h4">
+                <br />
+                <strong> Using YummyFit: </strong> {yummyFitDataList?.data?.list?.personalAchievementsDaysCount} Days
+              </Uu5Elements.Text>
               <br />
               <Uu5Elements.Text category="story" segment="heading" type="h4">
-                Výška: {yummyFitDataList?.data?.list?.height} cm <br /> Váha: {yummyFitDataList?.data?.list?.weight} kg{" "}
+                <strong> Výška: </strong> {yummyFitDataList?.data?.list?.height} cm <br /> <strong> Váha:</strong>{" "}
+                {yummyFitDataList?.data?.list?.weight} kg{" "}
               </Uu5Elements.Text>
+              <br />
               <ModalOnButtonSelectStats
                 header="Change weight and height"
                 colorScheme="primary"
                 size="l"
                 content={<ChooseWeightHeightForm create={updateUser} />}
               />
-
-              <Uu5Elements.Text category="story" segment="heading" type="h4">
-                Using YummyFit: {yummyFitDataList?.data?.list?.personalAchievementsDaysCount} Days
-              </Uu5Elements.Text>
+              <br />
             </WelcomeRow>{" "}
-          </>
+          </div>
         ) : (
           <ChooseWeightHeightForm create={createUser} />
         )}
