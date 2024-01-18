@@ -9,7 +9,7 @@ class PhysicalActivityController {
     return PhysicalActivityAbl.delete(ucEnv.getDtoIn(), ucEnv.getSession());
   }
   list(ucEnv) {
-    return PhysicalActivityAbl.list(ucEnv.getDtoIn());
+    return PhysicalActivityAbl.list(ucEnv.getDtoIn(), ucEnv.getSession());
   }
 }
 

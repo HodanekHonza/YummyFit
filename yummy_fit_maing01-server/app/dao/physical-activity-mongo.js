@@ -10,9 +10,10 @@ class PhysicalActivityMongo extends UuObjectDao {
     const query = { _id: physicalActivityId };
     return await super.findOne(query);
   }
-  async list(date) {
+  async list(date, uuIdentity) {
     return await super.find({
       creationDate: date,
+      uuIdentity: uuIdentity,
     });
   }
   async delete(physicalActivityId) {

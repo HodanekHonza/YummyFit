@@ -141,8 +141,6 @@ const YummyFitProvider = createComponent({
     };
 
     function calculateDailyCalorieIntake() {
-      yummyFitDataList?.data?.list?.weight;
-      yummyFitDataList?.data?.list?.height;
       const brm = 10 * yummyFitDataList?.data?.list?.weight + 6.25 * yummyFitDataList?.data?.list?.height;
       return brm;
     }
