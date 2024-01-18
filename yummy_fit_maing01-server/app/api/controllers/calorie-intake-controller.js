@@ -7,7 +7,7 @@ class CalorieIntakeController {
   }
 
   list(ucEnv) {
-    return CalorieIntakeAbl.list(ucEnv.getDtoIn());
+    return CalorieIntakeAbl.list(ucEnv.getDtoIn(), ucEnv.getSession());
   }
 
   delete(ucEnv) {

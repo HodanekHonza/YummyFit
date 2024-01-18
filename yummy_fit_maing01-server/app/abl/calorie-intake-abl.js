@@ -92,7 +92,7 @@ class CalorieIntakeAbl {
     return { uuObject, uuAppErrorMap };
   }
 
-  async list(dtoIn) {
+  async list(dtoIn, session) {
     let uuAppErrorMap = {};
     // validation of dtoIn
     const validationResult = this.validator.validate("calorieIntakeListDtoInType", dtoIn);
@@ -103,9 +103,11 @@ class CalorieIntakeAbl {
       Warnings.CalorieIntake.UnsupportedKeys.code,
       Errors.CalorieIntake.InvalidDtoIn
     );
+    const uuIdentity = session.getIdentity().getUuIdentity();
+
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
-    const list = await this.dao.list(today);
+    const list = await this.dao.list(today, uuIdentity);
     return list;
   }
 

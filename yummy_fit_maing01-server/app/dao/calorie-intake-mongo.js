@@ -11,9 +11,10 @@ class CalorieIntakeMongo extends UuObjectDao {
     return await super.findOne(query);
   }
 
-  async list(date) {
+  async list(date, uuIdentity) {
     return await super.find({
       creationDate: date,
+      uuIdentity: uuIdentity,
     });
   }
 

@@ -138,7 +138,7 @@ class PhysicalActivityAbl {
 
     return { uuObject: null, uuAppErrorMap };
   }
-  async list(dtoIn) {
+  async list(dtoIn, session) {
     let uuAppErrorMap = {};
     // validation of dtoIn
     const validationResult = this.validator.validate("physicalActivityListDtoInType", dtoIn);
@@ -149,9 +149,10 @@ class PhysicalActivityAbl {
       Warnings.PhysicalActivity.UnsupportedKeys.code,
       Errors.PhysicalActivity.InvalidDtoIn
     );
+    const uuIdentity = session.getIdentity().getUuIdentity();
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
-    const list = await this.dao.list(today);
+    const list = await this.dao.list(today, uuIdentity);
     return list.itemList;
   }
 }
